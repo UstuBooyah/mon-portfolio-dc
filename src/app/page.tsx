@@ -1,57 +1,91 @@
+"use client";
+
+import React from 'react';
+
 export default function Home() {
-  // 1. On définit la liste de vos projets
-  const projects = [
-    { 
-      id: 1, 
-      title: "Identity Design", 
-      category: "Branding", 
-      video: "/projet1.mp4" // Le nom de votre fichier dans le dossier public
-    },
-    { 
-      id: 2, 
-      title: "Digital Experience", 
-      category: "Web/UI", 
-      video: "/projet1.mp4" 
-    },
-  ];
-
   return (
-    <main className="min-h-screen bg-white p-8">
-      {/* Votre Header (Titre du site) */}
-      <header className="mb-24">
-        <h1 className="text-6xl font-bold tracking-tighter uppercase">Portfolio</h1>
-      </header>
-
-      {/* C'EST ÇA LE "BLOC PROJETS" : LA GRILLE CI-DESSOUS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {projects.map((project) => (
-          <div key={project.id} className="group cursor-pointer">
-            
-            {/* Conteneur de la vidéo */}
-            <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
-              <video 
-                src={project.video} 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-105 group-hover:scale-100"
-              />
-            </div>
-
-            {/* Infos du projet */}
-            <div className="flex justify-between items-baseline">
-              <h3 className="text-2xl font-medium tracking-tight uppercase italic group-hover:not-italic transition-all">
-                {project.title}
-              </h3>
-              <span className="text-xs uppercase tracking-widest text-gray-400">
-                {project.category}
-              </span>
-            </div>
-
-          </div>
-        ))}
+    <main className="relative h-screen w-full bg-[#0a0a0a] overflow-hidden font-sans text-white">
+      
+      {/* 1. LA VIDÉO PLEIN ÉCRAN */}
+      <div className="absolute inset-0 z-0">
+        <video 
+          src="/projet1.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="h-full w-full object-cover opacity-70" 
+        />
+        <div className="absolute inset-0 bg-black/20" />
       </div>
+
+      {/* 2. L'INTERFACE (OVERLAY) */}
+      <div className="relative z-10 h-full w-full flex flex-col p-6 md:p-10">
+        
+        {/* Structure Responsive : Empilé sur mobile, Grille sur Desktop */}
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 w-full">
+          
+          {/* COLONNE GAUCHE : Bloc Identité Rigide */}
+<div className="flex flex-col items-start text-left">
+  
+  {/* Nom/Logo - Aligné sur la ligne de fer gauche */}
+  <span className="text-[10px] md:text-[12px] tracking-[0.5em] uppercase font-bold mb-6 md:mb-10 block">
+    JEAN-PIERRE SASTRE
+  </span>
+
+  {/* Titre avec alignement forcé */}
+  <h1 className="flex flex-col text-[12vw] md:text-[5.5vw] font-bold uppercase leading-[0.85] tracking-lighter">
+    <span className="block">Creative</span>
+    <span className="block">Artistic</span>
+    <span className="block">Director</span>
+  </h1>
+            
+                      </div>
+          
+          {/* COLONNE CENTRE : Vide (pour l'espace) */}
+          <div className="hidden md:block order-2"></div>
+          
+          {/* BLOC DROITE : Menu (Reste bien à droite) */}
+          <nav className="flex flex-col items-end gap-2 text-[10px] md:text-[12px] tracking-[0.3em] uppercase font-medium order-1 md:order-3 mb-8 md:mb-0">
+            <a href="#" className="hover:opacity-50 transition-opacity border-b border-transparent hover:border-white">Selected Works</a>
+            <a href="#" className="hover:opacity-50 transition-opacity border-b border-transparent hover:border-white">Studio</a>
+            <a href="#" className="hover:opacity-50 transition-opacity border-b border-transparent hover:border-white">Contact</a>
+          </nav>
+        </div>
+
+        {/* BAS DE PAGE : Responsive */}
+<div className="mt-auto flex justify-between items-end w-full  pt-6">
+  
+  {/* Suppression du max-w et ajout de whitespace-nowrap */}
+  <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase leading-relaxed whitespace-nowrap flex gap-4">
+    <span>Digital</span>
+    <span className="opacity-30">/</span>
+    <span>Motion Design</span>
+    <span className="opacity-30">/</span>
+    <span>Projection Mapping</span>
+    <span className="opacity-30">/</span>
+    <span>Immersive Installations</span>
+  </div>
+
+  <div className="flex flex-col items-center ml-4">
+    <p className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase mb-2">Scroll</p>
+    <div className="h-[30px] md:h-[50px] w-[1px] bg-white origin-top animate-scroll-line"></div>
+  </div>
+</div>
+
+      </div>
+
+      <style jsx global>{`
+        @keyframes scroll-line {
+          0% { transform: scaleY(0); transform-origin: top; }
+          50% { transform: scaleY(1); transform-origin: top; }
+          51% { transform: scaleY(1); transform-origin: bottom; }
+          100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+        .animate-scroll-line {
+          animation: scroll-line 2.5s infinite ease-in-out;
+        }
+      `}</style>
     </main>
   );
 }
