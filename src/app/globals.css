@@ -1,20 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
+  --background: #000000;
+  --foreground: #ededed;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* On force la configuration pour Lenis dès le départ */
+html.lenis, 
+html.lenis body {
+  height: auto !important;
+  min-height: 100% !important;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif; /* On changera ça bientôt */
+  font-family: Arial, Helvetica, sans-serif;
+  /* On s'assure qu'aucun overflow caché ne traîne */
+  overflow-x: hidden !important; 
 }
 
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Cache la barre de scroll */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Indispensable pour le calcul du scroll par le navigateur */
+html {
+  overflow-y: scroll !important;
+}
+/* On s'assure que le contenu qui doit scroller est bien considéré comme scrollable */
+main {
+  overflow: visible !important;
+  display: block !important;
+}
+
+/* Si tu as un fond de particules ou une vidéo en arrière-plan, 
+   ajoute-lui cette classe pour qu'il ne bloque pas la souris */
+.pointer-events-none-all {
+  pointer-events: none !important;
+}
+/* On s'assure que rien ne bloque l'interaction avec le corps de la page */
+html, body {
+  touch-action: pan-y; /* Autorise le scroll tactile */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* On force le contenu principal au premier plan pour les événements souris */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Si tu as un fond (vidéo, particules), force-le en arrière-plan TOTAL */
+.background-container, #canvas-container, canvas {
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+/* On force le conteneur de scroll à être au premier plan */
+.lenis.lenis-smooth {
+  z-index: 9999 !important;
+}
+
+/* On s'assure que le wrapper de Lenis ne bloque pas les événements */
+[data-lenis-prevent] {
+  touch-action: auto;
+}
