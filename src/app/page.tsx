@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLenis } from 'lenis/react'; 
 import { ParticleTrail } from './ParticleTrail';
 
-// --- CONFIGURATION DES PROJETS (9 AU TOTAL) ---
+// --- CONFIGURATION DES PROJETS ---
 const PROJECTS_BASE = [
   { id: 1, title: "Digital Immersive", category: "Projection Mapping", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-6 md:mt-0", speed: -100 },
   { id: 2, title: "Motion Experience", category: "Direction Artistique", image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-5 md:mt-64 md:ml-12", speed: 120 },
@@ -89,10 +89,10 @@ export default function Home() {
   return (
     <main ref={containerRef} className="relative w-full bg-black font-sans text-white cursor-none overflow-x-hidden selection:bg-white selection:text-black">
       
-      {/* NOM FIXE - TAILLE RÉDUITE SUR MOBILE */}
+      {/* NOM FIXE */}
       <motion.div 
         style={{ left: nameLeft, x: nameX, scale: nameScale }} 
-        className="fixed top-10 z-[100] pointer-events-none"
+        className="fixed top-6 md:top-10 z-[100] pointer-events-none"
       >
         <span className="text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.3em] md:tracking-[0.5em] uppercase font-bold whitespace-nowrap">
           Jean-Pierre Sastre
@@ -100,7 +100,7 @@ export default function Home() {
       </motion.div>
 
       {/* 1. HERO */}
-      <section className="relative h-screen w-full bg-black overflow-hidden">
+      <section className="relative h-screen w-full bg-black overflow-hidden flex flex-col justify-between">
         <div className="absolute inset-0 z-0">
           <ParticleTrail />
           <motion.div style={{ y: videoY }} className="h-full w-full">
@@ -112,12 +112,13 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <motion.div style={{ y: textY, opacity: opacityFade }} className="relative z-10 h-full w-full flex flex-col justify-between p-10 md:p-14">
+        {/* HAUT DU HERO */}
+        <motion.div style={{ y: textY, opacity: opacityFade }} className="relative z-10 w-full p-8 md:p-14">
           <div className="flex flex-col md:grid md:grid-cols-3 gap-8 w-full items-start">
-            <div className="flex flex-col items-start space-y-0 mt-20">
+            <div className="flex flex-col items-start space-y-0 mt-16 md:mt-20">
               {["Creative", "Artistic", "Director"].map((text) => (
-                <div key={text} className="relative group h-[12vh] flex items-center w-full">
-                  <div className="absolute left-0 h-[10%] w-[150px] sm:w-[350px] bg-white/10 backdrop-blur-2xl border-y border-white/5 transition-all duration-1000 ease-in-out group-hover:w-[92vw] z-0" />
+                <div key={text} className="relative group h-[10vh] md:h-[12vh] flex items-center w-full">
+                  <div className="absolute left-0 h-[10%] w-[120px] sm:w-[350px] bg-white/10 backdrop-blur-2xl border-y border-white/5 transition-all duration-1000 ease-in-out group-hover:w-[92vw] z-0" />
                   <h1 className="relative z-10 text-[8vw] md:text-[6vw] font-bold uppercase leading-none px-4 md:px-6 pointer-events-none">{text}</h1>
                 </div>
               ))}
@@ -125,8 +126,7 @@ export default function Home() {
             
             <div className="hidden md:block" />
 
-            {/* NAVIGATION DROITE - TAILLE RÉDUITE SUR MOBILE */}
-            <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-10 md:p-14">
+            <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14">
               <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
                 Selected Works
               </button>
@@ -135,16 +135,17 @@ export default function Home() {
               </button>
             </nav>
           </div>
+        </motion.div>
 
-          <div className="flex justify-between items-end w-full">
-             <span className="text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 whitespace-nowrap max-w-none">
+        {/* BAS DU HERO - FIXÉ POUR ÊTRE TOUJOURS VISIBLE */}
+        <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full p-8 md:p-14 flex justify-between items-end pb-12 md:pb-14">
+             <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 whitespace-nowrap max-w-none">
                 Digital / Motion Design / Immersive Installations / Video Projection
              </span>
              <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center">
                 <p className="mb-2 text-[8px] md:text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
                 <div className="h-[30px] md:h-[50px] w-[1px] bg-white animate-scroll-line" />
              </button>
-          </div>
         </motion.div>
       </section>
 
