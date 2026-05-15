@@ -48,7 +48,7 @@ export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const lenis = useLenis();
 
-  const handleScrollTo = (target: string) => {
+  const handleScrollTo = (target: string | number) => {
     if (lenis) lenis.scrollTo(target, { duration: 2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
   };
 
@@ -87,7 +87,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main ref={containerRef} className="relative w-full bg-black font-sans text-white cursor-none overflow-x-hidden selection:bg-white selection:text-black">
+    <main ref={containerRef} id="hero-top" className="relative w-full bg-black font-sans text-white cursor-none overflow-x-hidden selection:bg-white selection:text-black">
       
       {/* NOM FIXE */}
       <motion.div 
@@ -112,7 +112,6 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* HAUT DU HERO */}
         <motion.div style={{ y: textY, opacity: opacityFade }} className="relative z-10 w-full p-8 md:p-14">
           <div className="flex flex-col md:grid md:grid-cols-3 gap-8 w-full items-start">
             <div className="flex flex-col items-start space-y-0 mt-16 md:mt-20">
@@ -126,8 +125,7 @@ export default function Home() {
             
             <div className="hidden md:block" />
 
-            {/* NAVIGATION DROITE (REPÈRE D'ALIGNEMENT : p-8 sur mobile, p-14 sur desktop) */}
-            <nav id="top-nav" className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14">
+            <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14">
               <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
                 Selected Works
               </button>
@@ -138,20 +136,14 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* BAS DU HERO - REFAIT AVEC ALIGNEMENT STRICT ET SANS DÉBORDEMENT */}
         <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
-             
-             {/* Spécialités : Se coupe ou passe à la ligne proprement sur mobile pour ne pas pousser le bouton Scroll */}
              <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 block max-w-[65vw] md:max-w-none leading-relaxed md:whitespace-nowrap">
                 Digital / Motion Design / Immersive Installations / Video Projection
              </span>
-
-             {/* Bouton Scroll : Parfaitement aligné sur la grille grâce au conteneur parent (px-8 / px-14) */}
              <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center shrink-0">
                 <p className="mb-2 text-[8px] md:text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
                 <div className="h-[30px] md:h-[50px] w-[1px] bg-white animate-scroll-line" />
              </button>
-
         </motion.div>
       </section>
 
@@ -174,32 +166,41 @@ export default function Home() {
         </div>
       </section>
 
-     {/* 3. GALERIE (SELECTED WORKS) */}
-<section id="projects-section" className="relative bg-[#050505] py-20 md:py-40 z-30">
-  <div className="relative w-full mb-20 md:mb-40 overflow-hidden">
-    <motion.h2 
-      initial={{ opacity: 0, x: -50 }} 
-      whileInView={{ opacity: 0.15, x: 0 }} 
-      transition={{ duration: 1.5 }}
-      /* Correction ici : text-[14vw] sur mobile, text-[20vw] sur desktop, et tracking ajusté */
-      className="text-[14vw] md:text-[20vw] font-bold uppercase tracking-tighter leading-none text-white text-center w-full px-4"
-    >
-      Selected Works
-    </motion.h2>
-  </div>
-  
-  <div className="px-6 md:px-32 grid grid-cols-1 md:grid-cols-12 gap-y-16 md:gap-y-64 max-w-[1500px] mx-auto">
-    {PROJECTS_BASE.map((p, i) => <ParallaxProject key={p.id} project={p} index={i} />)}
-  </div>
-</section>
+      {/* 3. GALERIE */}
+      <section id="projects-section" className="relative bg-[#050505] py-40 z-30">
+        <div className="relative w-full mb-40 overflow-hidden px-4">
+          <motion.h2 
+            initial={{ opacity: 0, x: -50 }} 
+            whileInView={{ opacity: 0.15, x: 0 }} 
+            transition={{ duration: 1.5 }}
+            className="text-[14vw] md:text-[20vw] font-bold uppercase tracking-tighter leading-none text-white text-center"
+          >
+            Selected Works
+          </motion.h2>
+        </div>
+        <div className="px-10 md:px-32 grid grid-cols-1 md:grid-cols-12 gap-y-20 md:gap-y-64 max-w-[1500px] mx-auto">
+          {PROJECTS_BASE.map((p, i) => <ParallaxProject key={p.id} project={p} index={i} />)}
+        </div>
+      </section>
 
-      {/* FOOTER */}
-      <section id="contact-section" className="relative h-screen w-full flex items-center justify-center border-t border-white/5 bg-black">
+      {/* FOOTER & CONTACT */}
+      <section id="contact-section" className="relative h-screen w-full flex flex-col items-center justify-center border-t border-white/5 bg-black">
           <div className="flex flex-col items-center px-10 text-center">
               <h2 className="text-[12px] md:text-[14px] font-bold uppercase tracking-[0.5em]">Contact</h2>
               <div className="h-[1px] w-8 bg-white/20 my-6" />
-              <a href="mailto:hello@jpsastre.com" className="text-[10px] md:text-[12px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">hello@jpsastre.com</a>
+              <a href="mailto:hello@jpsastre.com" className="text-[10px] md:text-[12px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors mb-20">
+                hello@jpsastre.com
+              </a>
           </div>
+
+          {/* BOUTON BACK TO TOP */}
+          <button 
+            onClick={() => handleScrollTo(0)}
+            className="group flex flex-col items-center gap-4 transition-opacity hover:opacity-60"
+          >
+            <div className="h-10 w-[1px] bg-white/20 group-hover:bg-white group-hover:h-14 transition-all duration-500" />
+            <span className="text-[9px] tracking-[0.4em] uppercase font-bold">Back to Top</span>
+          </button>
       </section>
 
       {/* CURSEUR */}
