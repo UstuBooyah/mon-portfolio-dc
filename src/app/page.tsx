@@ -137,12 +137,12 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* BAS DU HERO - FIXÉ POUR ÊTRE TOUJOURS VISIBLE */}
-        <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full p-8 md:p-14 flex justify-between items-end pb-12 md:pb-14">
-             <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 whitespace-nowrap max-w-none">
+        {/* BAS DU HERO - CORRIGÉ POUR MOBILE (TEXTES PLUS HAUTS ET PLUS A GAUCHE, BOUTON DE SCROLL RECADRÉ) */}
+        <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-6 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
+             <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 whitespace-nowrap max-w-none pl-2 md:pl-0">
                 Digital / Motion Design / Immersive Installations / Video Projection
              </span>
-             <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center">
+             <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center mr-6 md:mr-0 shrink-0">
                 <p className="mb-2 text-[8px] md:text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
                 <div className="h-[30px] md:h-[50px] w-[1px] bg-white animate-scroll-line" />
              </button>
