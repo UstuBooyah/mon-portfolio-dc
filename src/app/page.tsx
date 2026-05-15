@@ -174,22 +174,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. GALERIE */}
-      <section id="projects-section" className="relative bg-[#050505] py-40 z-30">
-        <div className="relative w-screen left-1/2 -translate-x-1/2 mb-40 overflow-hidden">
-          <motion.h2 
-            initial={{ opacity: 0, x: -100 }} 
-            whileInView={{ opacity: 0.15, x: 0 }} 
-            transition={{ duration: 1.5 }}
-            className="text-[20vw] font-bold uppercase tracking-tighter leading-none text-white whitespace-nowrap text-center"
-          >
-            Selected Works
-          </motion.h2>
-        </div>
-        <div className="px-10 md:px-32 grid grid-cols-1 md:grid-cols-12 gap-y-20 md:gap-y-64 max-w-[1500px] mx-auto">
-          {PROJECTS_BASE.map((p, i) => <ParallaxProject key={p.id} project={p} index={i} />)}
-        </div>
-      </section>
+     {/* 3. GALERIE (SELECTED WORKS) */}
+<section id="projects-section" className="relative bg-[#050505] py-20 md:py-40 z-30">
+  <div className="relative w-full mb-20 md:mb-40 overflow-hidden">
+    <motion.h2 
+      initial={{ opacity: 0, x: -50 }} 
+      whileInView={{ opacity: 0.15, x: 0 }} 
+      transition={{ duration: 1.5 }}
+      /* Correction ici : text-[14vw] sur mobile, text-[20vw] sur desktop, et tracking ajusté */
+      className="text-[14vw] md:text-[20vw] font-bold uppercase tracking-tighter leading-none text-white text-center w-full px-4"
+    >
+      Selected Works
+    </motion.h2>
+  </div>
+  
+  <div className="px-6 md:px-32 grid grid-cols-1 md:grid-cols-12 gap-y-16 md:gap-y-64 max-w-[1500px] mx-auto">
+    {PROJECTS_BASE.map((p, i) => <ParallaxProject key={p.id} project={p} index={i} />)}
+  </div>
+</section>
 
       {/* FOOTER */}
       <section id="contact-section" className="relative h-screen w-full flex items-center justify-center border-t border-white/5 bg-black">
