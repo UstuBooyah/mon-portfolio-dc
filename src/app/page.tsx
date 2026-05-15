@@ -89,12 +89,12 @@ export default function Home() {
   return (
     <main ref={containerRef} className="relative w-full bg-black font-sans text-white cursor-none overflow-x-hidden selection:bg-white selection:text-black">
       
-      {/* NOM FIXE */}
+      {/* NOM FIXE - TAILLE RÉDUITE SUR MOBILE */}
       <motion.div 
         style={{ left: nameLeft, x: nameX, scale: nameScale }} 
         className="fixed top-10 z-[100] pointer-events-none"
       >
-        <span className="text-[12px] tracking-[0.5em] uppercase font-bold whitespace-nowrap">
+        <span className="text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.3em] md:tracking-[0.5em] uppercase font-bold whitespace-nowrap">
           Jean-Pierre Sastre
         </span>
       </motion.div>
@@ -117,31 +117,32 @@ export default function Home() {
             <div className="flex flex-col items-start space-y-0 mt-20">
               {["Creative", "Artistic", "Director"].map((text) => (
                 <div key={text} className="relative group h-[12vh] flex items-center w-full">
-                  <div className="absolute left-0 h-[10%] w-[400px] bg-white/10 backdrop-blur-2xl border-y border-white/5 transition-all duration-1000 ease-in-out group-hover:w-[92vw] z-0" />
-                  <h1 className="relative z-10 text-[6vw] font-bold uppercase leading-none px-6 pointer-events-none">{text}</h1>
+                  <div className="absolute left-0 h-[10%] w-[150px] sm:w-[350px] bg-white/10 backdrop-blur-2xl border-y border-white/5 transition-all duration-1000 ease-in-out group-hover:w-[92vw] z-0" />
+                  <h1 className="relative z-10 text-[8vw] md:text-[6vw] font-bold uppercase leading-none px-4 md:px-6 pointer-events-none">{text}</h1>
                 </div>
               ))}
             </div>
             
             <div className="hidden md:block" />
 
-            <nav className="flex flex-col items-end gap-2 text-[12px] tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-10 md:p-14">
-              <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity">
+            {/* NAVIGATION DROITE - TAILLE RÉDUITE SUR MOBILE */}
+            <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-10 md:p-14">
+              <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
                 Selected Works
               </button>
-              <button onClick={() => handleScrollTo('#contact-section')} className="hover:opacity-50 transition-opacity">
+              <button onClick={() => handleScrollTo('#contact-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
                 Contact
               </button>
             </nav>
           </div>
 
           <div className="flex justify-between items-end w-full">
-             <span className="text-[10px] tracking-[0.2em] uppercase text-white/40 whitespace-nowrap max-w-none">
+             <span className="text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 whitespace-nowrap max-w-none">
                 Digital / Motion Design / Immersive Installations / Video Projection
              </span>
              <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center">
-                <p className="mb-2 text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
-                <div className="h-[50px] w-[1px] bg-white animate-scroll-line" />
+                <p className="mb-2 text-[8px] md:text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
+                <div className="h-[30px] md:h-[50px] w-[1px] bg-white animate-scroll-line" />
              </button>
           </div>
         </motion.div>
@@ -154,8 +155,8 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
         </motion.div>
         <div className="sticky top-0 h-screen w-full flex items-center justify-center z-20 pointer-events-none">
-            <div className="w-[85vw] md:w-[55vw] aspect-square bg-black border border-white/5 flex items-center justify-center p-12 pointer-events-auto shadow-2xl">
-                <p className="text-[3.5vw] md:text-[2vw] font-bold uppercase leading-tight text-white text-center">
+            <div className="w-[85vw] md:w-[55vw] aspect-square bg-black border border-white/5 flex items-center justify-center p-8 md:p-12 pointer-events-auto shadow-2xl">
+                <p className="text-[4.5vw] md:text-[2vw] font-bold uppercase leading-tight text-white text-center">
                     {INTRO_TEXT.split(" ").map((word, i) => (
                         <motion.span key={i} className="inline-block mr-2" initial={{ opacity: 0 }} whileInView={{ opacity: i % 3 === 0 ? 0.3 : 1 }} transition={{ delay: i * 0.02 }}>
                           {word}
@@ -166,29 +167,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. GALERIE (SELECTED WORKS) */}
+      {/* 3. GALERIE */}
       <section id="projects-section" className="relative bg-[#050505] py-40 z-30">
         <div className="relative w-screen left-1/2 -translate-x-1/2 mb-40 overflow-hidden">
           <motion.h2 
             initial={{ opacity: 0, x: -100 }} 
             whileInView={{ opacity: 0.15, x: 0 }} 
             transition={{ duration: 1.5 }}
-            className="text-[11.5vw] font-bold uppercase tracking-lighter leading-none text-white whitespace-nowrap text-center"
+            className="text-[20vw] font-bold uppercase tracking-tighter leading-none text-white whitespace-nowrap text-center"
           >
             Selected Works
           </motion.h2>
         </div>
-        <div className="px-10 md:px-32 grid grid-cols-1 md:grid-cols-12 gap-y-32 md:gap-y-64 max-w-[1500px] mx-auto">
+        <div className="px-10 md:px-32 grid grid-cols-1 md:grid-cols-12 gap-y-20 md:gap-y-64 max-w-[1500px] mx-auto">
           {PROJECTS_BASE.map((p, i) => <ParallaxProject key={p.id} project={p} index={i} />)}
         </div>
       </section>
 
       {/* FOOTER */}
       <section id="contact-section" className="relative h-screen w-full flex items-center justify-center border-t border-white/5 bg-black">
-          <div className="flex flex-col items-center">
-              <h2 className="text-[14px] font-bold uppercase tracking-[0.5em]">Contact</h2>
+          <div className="flex flex-col items-center px-10 text-center">
+              <h2 className="text-[12px] md:text-[14px] font-bold uppercase tracking-[0.5em]">Contact</h2>
               <div className="h-[1px] w-8 bg-white/20 my-6" />
-              <a href="mailto:hello@jpsastre.com" className="text-[10px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">hello@jpsastre.com</a>
+              <a href="mailto:hello@jpsastre.com" className="text-[10px] md:text-[12px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">hello@jpsastre.com</a>
           </div>
       </section>
 
