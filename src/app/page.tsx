@@ -92,7 +92,7 @@ export default function Home() {
       {/* NOM FIXE */}
       <motion.div 
         style={{ left: nameLeft, x: nameX, scale: nameScale }} 
-        className="fixed top-6 md:top-10 z-[100] pointer-events-none"
+        className="fixed top-8 md:top-10 z-[100] pointer-events-none"
       >
         <span className="text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.3em] md:tracking-[0.5em] uppercase font-bold whitespace-nowrap">
           Jean-Pierre Sastre
@@ -126,7 +126,8 @@ export default function Home() {
             
             <div className="hidden md:block" />
 
-            <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14">
+            {/* NAVIGATION DROITE (REPÈRE D'ALIGNEMENT : p-8 sur mobile, p-14 sur desktop) */}
+            <nav id="top-nav" className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14">
               <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
                 Selected Works
               </button>
@@ -137,15 +138,20 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* BAS DU HERO - CORRIGÉ POUR MOBILE (TEXTES PLUS HAUTS ET PLUS A GAUCHE, BOUTON DE SCROLL RECADRÉ) */}
-        <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-6 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
-             <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 whitespace-nowrap max-w-none pl-2 md:pl-0">
+        {/* BAS DU HERO - REFAIT AVEC ALIGNEMENT STRICT ET SANS DÉBORDEMENT */}
+        <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
+             
+             {/* Spécialités : Se coupe ou passe à la ligne proprement sur mobile pour ne pas pousser le bouton Scroll */}
+             <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 block max-w-[65vw] md:max-w-none leading-relaxed md:whitespace-nowrap">
                 Digital / Motion Design / Immersive Installations / Video Projection
              </span>
-             <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center mr-6 md:mr-0 shrink-0">
+
+             {/* Bouton Scroll : Parfaitement aligné sur la grille grâce au conteneur parent (px-8 / px-14) */}
+             <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center shrink-0">
                 <p className="mb-2 text-[8px] md:text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
                 <div className="h-[30px] md:h-[50px] w-[1px] bg-white animate-scroll-line" />
              </button>
+
         </motion.div>
       </section>
 
