@@ -262,10 +262,14 @@ const [isDemoreelOpen, setIsDemoreelOpen] = useState(false);
       whileHover={{ scale: 1.15, opacity: 1 }}
       whileTap={{ scale: 0.98 }}
       onClick={() => setIsDemoreelOpen(true)} // Ouvre la vidéo au clic
-className="text-[12px] tracking-[0.4em] uppercase font-bold text-white/40 hover:text-white transition-colors duration-300 
-             translate-x-[-465px] 
-             translate-y-[-45px]
-             relative z-40"
+className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40
+           {/* --- RÉGLAGES SUR MOBILE --- */}
+           translate-x-0              {/* Centré horizontalement */}
+           translate-y-0              {/* Hauteur normale par défaut sur mobile (pas de décalage) */}
+           
+           {/* --- RÉGLAGES SUR ORDINATEUR (md:) --- */}
+           md:translate-x-[-465px]    {/* Ton décalage horizontal pour ordi */}
+           md:translate-y-[-45px]"    {/* Ton décalage vertical pour ordi */}
                 >
       WATCH DEMOREEL
     </motion.button>
