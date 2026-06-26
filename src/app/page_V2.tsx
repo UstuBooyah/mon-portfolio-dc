@@ -251,7 +251,7 @@ export default function Home() {
             e.stopPropagation(); // Évite de double-cliquer la vidéo en dessous
             setIsDemoreelOpen(true);
           }}
-          className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 translate-x-100 translate-y-0 lg:translate-x-[-495px] lg:translate-y-[-45px] pointer-events-auto mx-auto lg:mx-0"
+          className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 translate-x-100 translate-y-0 lg:translate-x-[-465px] lg:translate-y-[-45px] pointer-events-auto mx-auto lg:mx-0"
         >
           WATCH DEMOREEL
         </motion.button>
