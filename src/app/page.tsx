@@ -675,49 +675,35 @@ const MainHydratedContent = () => {
       </section>
 
 
-      {/* MODAL VIDÉO */}
+{/* MODAL VIDÉO */}
+{isDemoreelOpen && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+    className="fixed inset-0 z-[99999] flex items-center justify-center p-4 md:p-12 pointer-events-auto bg-transparent"
+  >
+    {/* CORRECTION DU BOUTON (outline-none) */}
+    <button 
+      ref={popupRef}
+      onClick={() => setIsDemoreelOpen(false)}
+      className="absolute top-6 right-6 text-white/50 hover:text-white text-[10px] tracking-[0.3em] uppercase z-[60] transition-colors duration-300 clickable outline-none focus:outline-none focus:ring-0"
+    >
+      [ CLOSE ]
+    </button>
+    
+    <div className="w-full max-w-5xl aspect-video bg-neutral-950 shadow-2xl relative z-10">
+      <video src="Demoreel_2026_V1_low2.mp4" autoPlay controls className="w-full h-full object-contain" />
+    </div>
 
-      {isDemoreelOpen && (
-
-        <motion.div
-
-          initial={{ opacity: 0 }}
-
-          animate={{ opacity: 1 }}
-
-          exit={{ opacity: 0 }}
-
-          transition={{ duration: 0.5 }}
-
-          className="fixed inset-0 bg-black z-[99999] flex items-center justify-center p-4 md:p-12 pointer-events-auto"
-
-        >
-
-          <button
-
-            ref={popupRef}
-
-            onClick={() => setIsDemoreelOpen(false)}
-
-            className="absolute top-6 right-6 text-white/50 hover:text-white text-[10px] tracking-[0.3em] uppercase z-[60] transition-colors duration-300 clickable"
-
-          >
-
-            [ CLOSE ]
-
-          </button>
-
-          <div className="w-full max-w-5xl aspect-video bg-neutral-950 shadow-2xl relative z-10">
-
-            <video src="Demoreel_2026_V1_low2.mp4" autoPlay controls className="w-full h-full object-contain" />
-
-          </div>
-
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0 cursor-pointer" onClick={() => setIsDemoreelOpen(false)} />
-
-        </motion.div>
-
-      )}
+    {/* OVERLAY FORCÉ EN MIX-BLEND ET OPACITÉ ULTRA FINE */}
+    <div 
+      className="absolute inset-0 bg-neutral-950/20 backdrop-blur-[30px] z-0 cursor-pointer mix-blend-normal" 
+      onClick={() => setIsDemoreelOpen(false)} 
+    />
+  </motion.div>
+)}
 
     </div>
 
