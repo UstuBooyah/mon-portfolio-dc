@@ -22,7 +22,7 @@ const PROJECTS_BASE = [
 
     category: "Projection Mapping",
 
-    image: "/Selected Works/2024-louboutin_01.webp",
+    image: "/SelectedWorks/2024-louboutin-04_Thb.webp",
 
     layout: "md:col-span-6 md:mt-0",
 
@@ -30,7 +30,7 @@ const PROJECTS_BASE = [
 
   },
 
-  { id: 2, title: "Motion Experience", category: "Direction Artistique", image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-5 md:mt-64 md:ml-12", speed: 120 },
+  { id: 2, title: "Reopening Nôtre-Dame", category: "Projection Mapping", image: "/SelectedWorks/NOTRE-DAME-Thb.webp", layout: "md:col-span-5 md:mt-64 md:ml-12", speed: 120 },
 
   { id: 3, title: "Interactive Flow", category: "Installation", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-5 md:mt-20", speed: -150 },
 
