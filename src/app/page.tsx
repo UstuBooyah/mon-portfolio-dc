@@ -22,7 +22,7 @@ const PROJECTS_BASE = [
 
     category: "Projection Mapping",
 
-    image: "/Selected Works/2024-louboutin_01.jpg",
+    image: "/Selected Works/2024-louboutin_01.webp",
 
     layout: "md:col-span-6 md:mt-0",
 
@@ -560,7 +560,7 @@ const MainHydratedContent = () => {
 
         <motion.div style={{ y: introBgY }} className="absolute inset-0 z-0 h-full w-full">
 
-            <img src="/SelectedWorks/2024-louboutin_01.jpg" className="h-full w-full object-cover grayscale opacity-40" />
+            <img src="/SelectedWorks/2024-louboutin_01.webp" className="h-full w-full object-cover grayscale opacity-40" />
 
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
 
