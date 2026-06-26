@@ -216,31 +216,32 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* CONTENEUR TEXTES (RENDU TRANSPARENT AUX CLICS AVEC pointer-events-none) */}
-        <motion.div style={{ y: textY, opacity: opacityFade }} className="relative z-10 w-full p-8 md:p-14 pointer-events-none">
-          <div className="flex flex-col md:grid md:grid-cols-3 gap-8 w-full items-start">
-            <div className="flex flex-col items-start space-y-0 mt-16 md:mt-20">
-              {["Creative", "Artistic", "Director"].map((text) => (
-                <div key={text} className="relative group h-[10vh] md:h-[12vh] flex items-center w-full">
-                  <div className="absolute left-0 h-[10%] w-[120px] sm:w-[350px] bg-white/10 backdrop-blur-2xl border-y border-white/5 transition-all duration-1000 ease-in-out group-hover:w-[92vw] z-0" />
-                  <h1 className="relative z-10 text-[8vw] md:text-[6vw] font-bold uppercase leading-none px-4 md:px-6">{text}</h1>
-                </div>
-              ))}
-            </div>
-            
-            <div className="hidden md:block" />
+        {/* CONTENEUR TEXTES (On force tout le bloc à laisser passer les clics) */}
+<motion.div style={{ y: textY, opacity: opacityFade }} className="relative z-10 w-full p-8 md:p-14 pointer-events-none">
+  <div className="flex flex-col md:grid md:grid-cols-3 gap-8 w-full items-start pointer-events-none">
+    
+    <div className="flex flex-col items-start space-y-0 mt-16 md:mt-20 pointer-events-none">
+      {["Creative", "Artistic", "Director"].map((text) => (
+        <div key={text} className="relative group h-[10vh] md:h-[12vh] flex items-center w-full pointer-events-none">
+          <div className="absolute left-0 h-[10%] w-[120px] sm:w-[350px] bg-white/10 backdrop-blur-2xl border-y border-white/5 transition-all duration-1000 ease-in-out group-hover:w-[92vw] z-0 pointer-events-none" />
+          <h1 className="relative z-10 text-[8vw] md:text-[6vw] font-bold uppercase leading-none px-4 md:px-6 pointer-events-none">{text}</h1>
+        </div>
+      ))}
+    </div>
+    
+    <div className="hidden md:block pointer-events-none" />
 
-            {/* NAVIGATION RENDUE RE-CLIQUABLE INDIVIDUELLEMENT */}
-            <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14 pointer-events-auto">
-              <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
-                Selected Works
-              </button>
-              <button onClick={() => handleScrollTo('#contact-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
-                Contact
-              </button>
-            </nav>
-          </div>
-        </motion.div>
+    {/* NAVIGATION (Ici on RE-AUTORISE les clics avec pointer-events-auto pour pouvoir cliquer sur les menus) */}
+    <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14 pointer-events-auto">
+      <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
+        Selected Works
+      </button>
+      <button onClick={() => handleScrollTo('#contact-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
+        Contact
+      </button>
+    </nav>
+  </div>
+</motion.div>
 
         {/* BOUTON WATCH DEMOREEL NETTOYÉ ET RE-CLIQUABLE */}
         <motion.button
@@ -250,7 +251,7 @@ export default function Home() {
             e.stopPropagation(); // Évite de double-cliquer la vidéo en dessous
             setIsDemoreelOpen(true);
           }}
-          className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 translate-x-0 translate-y-0 md:translate-x-[-465px] md:translate-y-[-45px] pointer-events-auto mx-auto md:mx-0"
+          className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 translate-x-100 translate-y-0 md:translate-x-[-495px] md:translate-y-[-45px] pointer-events-auto mx-auto md:mx-0"
         >
           WATCH DEMOREEL
         </motion.button>
