@@ -259,20 +259,13 @@ const [isDemoreelOpen, setIsDemoreelOpen] = useState(false);
           </div>
         </motion.div>
 <motion.button
-      whileHover={{ scale: 1.15, opacity: 1 }}
-      whileTap={{ scale: 0.98 }}
-      onClick={() => setIsDemoreelOpen(true)} // Ouvre la vidéo au clic
-className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40
-           {/* --- RÉGLAGES SUR MOBILE --- */}
-           translate-x-0              {/* Centré horizontalement */}
-           translate-y-0              {/* Hauteur normale par défaut sur mobile (pas de décalage) */}
-           
-           {/* --- RÉGLAGES SUR ORDINATEUR (md:) --- */}
-           md:translate-x-[-465px]    {/* Ton décalage horizontal pour ordi */}
-           md:translate-y-[-45px]"    {/* Ton décalage vertical pour ordi */}
-                >
-      WATCH DEMOREEL
-    </motion.button>
+  whileHover={{ scale: 1.05, opacity: 1 }}
+  whileTap={{ scale: 0.98 }}
+  onClick={() => setIsDemoreelOpen(true)}
+  className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 translate-x-0 translate-y-0 md:translate-x-[-465px] md:translate-y-[-45px]"
+>
+  WATCH DEMOREEL
+</motion.button>
 
         <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
              <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 block max-w-[65vw] md:max-w-none leading-relaxed md:whitespace-nowrap">
