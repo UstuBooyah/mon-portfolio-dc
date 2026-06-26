@@ -11,11 +11,13 @@ const PROJECTS_BASE = [
     id: 1, 
     title: "Paris is Louboutining", 
     category: "Projection Mapping", 
+    
     image: "/Selected Works/2024-louboutin_01.jpg", 
     layout: "md:col-span-6 md:mt-0", 
     speed: -100 
   },
   { id: 2, title: "Motion Experience", category: "Direction Artistique", image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-5 md:mt-64 md:ml-12", speed: 120 },
+  // ... le reste de tes projets reste inchangé
   { id: 3, title: "Interactive Flow", category: "Installation", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-5 md:mt-20", speed: -150 },
   { id: 4, title: "Visual Narrative", category: "Digital Design", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-6 md:ml-24 md:mt-40", speed: 80 },
   { id: 5, title: "Abstract Core", category: "Generative Art", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-7 md:mt-20", speed: -120 },
@@ -27,14 +29,19 @@ const PROJECTS_BASE = [
 
 const INTRO_TEXT = "Je suis un créatif passionné basé à Paris, spécialisé en motion design & expériences immersives pour les marques. Mon travail fusionne art, technologie et narration pour créer des moments inoubliables.";
 
+// --- COMPOSANT DES LIGNES & POINTS NETS EN PARALLAXE RAPIDE ---
 const BackgroundLines = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   
+  // Plans de parallaxe des lignes
   const yFast = useTransform(scrollYProgress, [0, 1], [-200, 200]);
   const ySlow = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  
+  // Vitesse ultra-rapide pour les points blancs (contours nets)
   const ySuperFast = useTransform(scrollYProgress, [0, 1], [-700, 700]);
 
+  // 1. Matrice de lignes (Épaisseur 2px, opacité très basse)
   const lines = useRef(
     Array.from({ length: 60 }).map((_, i) => {
       const top = 5 + (i * 1.5);
@@ -43,21 +50,27 @@ const BackgroundLines = () => {
       const isFast = i % 2 === 0;
       const opacity = 0.02 + ((i * 3) % 8) / 100;
       const isDesktopOnly = i % 3 === 0;
+
       return { top: `${top}%`, left: `${left}%`, height: `${height}vh`, isFast, opacity, isDesktopOnly };
     })
   );
 
+  // 2. Sélection restreinte de points (Quantité modérée, tailles variées de 1 à 4px)
   const dots = useRef(
     Array.from({ length: 35 }).map((_, i) => {
       const top = 8 + (i * 2.5);
-      const left = (i * 19.3) % 100; 
-      const opacity = 0.15 + ((i * 7) % 25) / 100; 
+      const left = (i * 19.3) % 100; // Largeur bien distribuée
+      const opacity = 0.15 + ((i * 7) % 25) / 100; // Visibilité subtile mais nette
+      
+      // Tailles dynamiques de 1px, 2px, 3px ou 4px maximum
       const sizeIndex = i % 4;
       const sizeClass = sizeIndex === 0 ? "w-[1px] h-[1px]" 
                       : sizeIndex === 1 ? "w-[2px] h-[2px]" 
                       : sizeIndex === 2 ? "w-[3px] h-[3px]" 
                       : "w-[4px] h-[4px]";
+
       const isDesktopOnly = i % 3 === 0;
+
       return { top: `${top}%`, left: `${left}%`, opacity, sizeClass, isDesktopOnly };
     })
   );
@@ -65,6 +78,8 @@ const BackgroundLines = () => {
   return (
     <div ref={ref} className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
       <div className="relative w-full h-full">
+        
+        {/* RENDU DES LIGNES */}
         {lines.current.map((line, idx) => (
           <motion.div
             key={`line-${idx}`}
@@ -80,6 +95,8 @@ const BackgroundLines = () => {
             }`}
           />
         ))}
+
+        {/* RENDU DES POINTS NETS (SHARP) */}
         {dots.current.map((dot, idx) => (
           <motion.div
             key={`dot-${idx}`}
@@ -89,11 +106,13 @@ const BackgroundLines = () => {
               left: dot.left,
               opacity: dot.opacity
             }}
+            /* w-[x] h-[x] injecté dynamiquement, bg-white pur sans shadow ni blur */
             className={`absolute bg-white rounded-full ${dot.sizeClass} ${
               dot.isDesktopOnly ? "hidden md:block" : ""
             }`}
           />
         ))}
+
       </div>
     </div>
   );
@@ -114,6 +133,7 @@ const ParallaxProject = ({ project, index }: { project: any, index: number }) =>
       transition={{ duration: 1 }} 
       className={`group relative ${project.layout} z-10`}
     >
+      {/* ZONE IMAGE (Le survol ne fait plus que zoomer/assombrir proprement) */}
       <div className="relative aspect-[4/5] md:aspect-[16/11] bg-neutral-900 border border-white/5 overflow-hidden">
         <motion.img 
           src={project.image} 
@@ -121,17 +141,24 @@ const ParallaxProject = ({ project, index }: { project: any, index: number }) =>
           whileHover={{ scale: 1.05 }} 
           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
         />
+        {/* Voile sombre au survol pour détacher l'image du fond */}
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       </div>
+
+      {/* BLOC TEXTE DESSOUS (Épuré et restructuré) */}
       <div className="mt-6 flex justify-between items-start px-1">
           <div className="flex flex-col space-y-1">
+              {/* Le thème / catégorie juste au-dessus, discret */}
               <span className="text-[9px] tracking-[0.2em] uppercase text-white/50">
                 {project.category}
               </span>
+              {/* Le titre du projet */}
               <span className="text-[11px] tracking-[0.3em] uppercase font-bold text-white">
                 {project.title}
               </span>
           </div>
+          
+          {/* Numérotation discrète à droite */}
           <span className="text-[10px] text-white/20 font-mono mt-0.5">0{index + 1}</span>
       </div>
     </motion.div>
@@ -142,7 +169,6 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [isDemoreelOpen, setIsDemoreelOpen] = useState(false);
   const lenis = useLenis();
 
   const handleScrollTo = (target: string | number) => {
@@ -182,7 +208,7 @@ export default function Home() {
       window.removeEventListener('mouseover', handleOver);
     };
   }, []);
-
+const [isDemoreelOpen, setIsDemoreelOpen] = useState(false);
   return (
     <main ref={containerRef} id="hero-top" className="relative w-full bg-black font-sans text-white cursor-none overflow-x-hidden selection:bg-white selection:text-black">
       
@@ -198,97 +224,179 @@ export default function Home() {
 
       {/* 1. HERO */}
       <section className="relative h-screen w-full bg-black overflow-hidden flex flex-col justify-between">
-        
-        {/* ARRIÈRE-PLAN VIDÉO CLIQUABLE AVEC LES EFFETS FONCTIONNELS */}
+        <div 
+  onClick={() => setIsDemoreelOpen(true)}
+  className="absolute inset-0 w-full h-full overflow-hidden cursor-pointer group/video"
+  
+></div>
         <div className="absolute inset-0 z-0">
           <ParticleTrail />
-          <motion.div 
-            style={{ y: videoY }} 
-            onClick={() => setIsDemoreelOpen(true)}
-            className="h-full w-full cursor-pointer group/video relative z-10"
-          >
+          <motion.div style={{ y: videoY }} className="h-full w-full">
             <video 
               src="Demoreel_2026_V1_15s.mp4"
               autoPlay loop muted playsInline 
-              className="w-full h-full object-cover opacity-60 group-hover/video:scale-105 transition-transform duration-1000 ease-out z-10"
+              className="w-full h-full object-cover opacity-60 group-hover/video:scale-102 transition-transform duration-700 ease-out"
+              
             />
-            <div className="absolute inset-0 bg-black/20 group-hover/video:bg-black/0 transition-colors duration-700 z-20" />
+            <div className="absolute inset-0 bg-black/10 group-hover/video:bg-black/0 transition-colors duration-500" />
           </motion.div>
         </div>
 
-        {/* CONTENEUR TEXTES (On force tout le bloc à laisser passer les clics) */}
-<motion.div style={{ y: textY, opacity: opacityFade }} className="relative z-10 w-full p-8 md:p-14 pointer-events-none">
-  <div className="flex flex-col md:grid md:grid-cols-3 gap-8 w-full items-start pointer-events-none">
-    
-    <div className="flex flex-col items-start space-y-0 mt-16 md:mt-20 pointer-events-none">
-      {["Creative", "Artistic", "Director"].map((text) => (
-        <div key={text} className="relative group h-[10vh] md:h-[12vh] flex items-center w-full pointer-events-none">
-          <div className="absolute left-0 h-[10%] w-[120px] sm:w-[350px] bg-white/10 backdrop-blur-2xl border-y border-white/5 transition-all duration-1000 ease-in-out group-hover:w-[92vw] z-0 pointer-events-none" />
-          <h1 className="relative z-10 text-[8vw] md:text-[6vw] font-bold uppercase leading-none px-4 md:px-6 pointer-events-none">{text}</h1>
-        </div>
-      ))}
-    </div>
-    
-    <div className="hidden md:block pointer-events-none" />
+        <motion.div style={{ y: textY, opacity: opacityFade }} className="relative z-10 w-full p-8 md:p-14">
+          <div className="flex flex-col md:grid md:grid-cols-3 gap-8 w-full items-start">
+            <div className="flex flex-col items-start space-y-0 mt-16 md:mt-20">
+              <div className="relative z-10 h-full w-full pointer-events-none"></div>
+              {["Creative", "Artistic", "Director"].map((text) => (
+                <div key={text} className="relative group h-[10vh] md:h-[12vh] flex items-center w-full">
+                  <div className="absolute left-0 h-[10%] w-[120px] sm:w-[350px] bg-white/10 backdrop-blur-2xl border-y border-white/5 transition-all duration-1000 ease-in-out group-hover:w-[92vw] z-0" />
+                  <h1 className="relative z-10 text-[8vw] md:text-[6vw] font-bold uppercase leading-none px-4 md:px-6 pointer-events-none">{text}</h1>
+                </div>
+              ))}
+            </div>
+            
+            <div className="hidden md:block" />
 
-    {/* NAVIGATION (Ici on RE-AUTORISE les clics avec pointer-events-auto pour pouvoir cliquer sur les menus) */}
-    <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14 pointer-events-auto">
-      <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
-        Selected Works
-      </button>
-      <button onClick={() => handleScrollTo('#contact-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
-        Contact
-      </button>
-    </nav>
-  </div>
-</motion.div>
+            <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14">
+              <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
+                Selected Works
+              </button>
+              <button onClick={() => handleScrollTo('#contact-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
+                Contact
+              </button>
+            </nav>
+          </div>
+        </motion.div>
+<motion.button
+  whileHover={{ scale: 1.05, opacity: 1 }}
+  whileTap={{ scale: 0.98 }}
+  onClick={() => setIsDemoreelOpen(true)}
+  className="pointer-events-auto text-[9px] tracking-[0.4em] uppercase ... "
+  className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 translate-x-0 translate-y-0 md:translate-x-[-465px] md:translate-y-[-45px]"
+>
+  WATCH DEMOREEL
+</motion.button>
 
-        {/* BOUTON WATCH DEMOREEL NETTOYÉ ET RE-CLIQUABLE */}
-        <motion.button
-          whileHover={{ scale: 1.05, opacity: 1 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={(e) => {
-            e.stopPropagation(); // Évite de double-cliquer la vidéo en dessous
-            setIsDemoreelOpen(true);
-          }}
-          className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 translate-x-100 translate-y-0 lg:translate-x-[-465px] lg:translate-y-[-45px] pointer-events-auto mx-auto lg:mx-0"
-        >
-          WATCH DEMOREEL
-        </motion.button>
-
-        {/* SECTION SCROLL BAS DE PAGE */}
-        <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end pointer-events-none">
+        <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
              <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 block max-w-[65vw] md:max-w-none leading-relaxed md:whitespace-nowrap">
                 Digital / Motion Design / Immersive Installations / Video Projection
              </span>
-             <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center shrink-0 pointer-events-auto">
+             <button onClick={() => handleScrollTo('#projects-section')} className="group flex flex-col items-center shrink-0">
                 <p className="mb-2 text-[8px] md:text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
                 <div className="h-[30px] md:h-[50px] w-[1px] bg-white animate-scroll-line" />
              </button>
         </motion.div>
 
-        {/* MODAL MODAL PLEIN ÉCRAN */}
-        {isDemoreelOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4 md:p-12 pointer-events-auto"
-          >
-            <button 
-              onClick={() => setIsDemoreelOpen(false)}
-              className="absolute top-6 right-6 text-white/50 hover:text-white text-[10px] tracking-[0.3em] uppercase z-[60] transition-colors duration-300"
-            >
-              [ X ]
-            </button>
-            <div className="w-full max-w-5xl aspect-video bg-neutral-950 shadow-2xl relative z-10">
-              <video 
-                src="Demoreel_2026_V1_low2.mp4" 
-                autoPlay 
-                controls 
-                className="w-full h-full object-contain"
-              />
+        {/* CINÉMA / MODAL PLEIN ÉCRAN POUR LA VIDÉO COMPLÈTE */}
+{isDemoreelOpen && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+    className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4 md:p-12 pointer-events-auto"
+  >
+    {/* Bouton Fermer en haut à droite */}
+    <button 
+      onClick={() => setIsDemoreelOpen(false)}
+      className="absolute top-6 right-6 text-white/50 hover:text-white text-[10px] tracking-[0.3em] uppercase z-51 transition-colors duration-300"
+    >
+      [ X ]
+    </button>
+
+    {/* Conteneur de la vidéo (format 16:9 cinématographique) */}
+    <div className="w-full max-w-5xl aspect-video bg-neutral-950 shadow-2xl relative">
+      <video 
+        src="Demoreel_2026_V1_low2.mp4" // Utilise le même fichier (ou un fichier plus long/lourd si tu veux)
+        autoPlay 
+        controls // Ajoute les barres de lecture (play, pause, volume) pour le confort
+        className="w-full h-full object-contain"
+      />
+    </div>
+
+    {/* Fond cliquable pour fermer également si on clique à côté de la vidéo */}
+    <div 
+      className="absolute inset-0 -z-10 bg-transparent" 
+      onClick={() => setIsDemoreelOpen(false)} 
+    />
+  </motion.div>
+)}
+      </section>
+
+      {/* 2. ABOUT SECTION */}
+      <section ref={introRef} className="relative min-h-[150vh] w-full flex items-center justify-center">
+        <motion.div style={{ y: introBgY }} className="absolute inset-0 z-0 h-full w-full">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600" className="h-full w-full object-cover grayscale opacity-40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        </motion.div>
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center z-20 pointer-events-none">
+            <div className="w-[85vw] md:w-[55vw] aspect-square bg-black border border-white/5 flex items-center justify-center p-8 md:p-12 pointer-events-auto shadow-2xl">
+                <p className="text-[4.5vw] md:text-[2vw] font-bold uppercase leading-light text-white text-center">
+                    {INTRO_TEXT.split(" ").map((word, i) => (
+                        <motion.span key={i} className="inline-block mr-2" initial={{ opacity: 0 }} whileInView={{ opacity: i % 3 === 0 ? 0.3 : 1 }} transition={{ delay: i * 0.02 }}>
+                          {word}
+                        </motion.span>
+                    ))}
+                </p>
             </div>
-            <div 
-              className="absolute inset-0 bg-transparent z-0"
+        </div>
+      </section>
+
+     {/* 3. GALERIE */}
+<section id="projects-section" className="relative bg-[#050505] py-40 z-30">
+  
+  {/* Titre épuré */}
+  <div className="relative w-full mb-40 overflow-hidden px-4 z-10">
+    <motion.h2 
+      initial={{ opacity: 0, x: -50 }} 
+      whileInView={{ opacity: 0.15, x: 0 }} 
+      transition={{ duration: 1.5 }}
+      className="text-[14vw] md:text-[20vw] font-bold uppercase tracking-lighter leading-none text-white text-center"
+    >
+      Selected Works
+    </motion.h2>
+  </div>
+  
+  {/* Zone parente de la galerie sans fond opaque pour laisser passer les lignes */}
+  <div className="relative w-full match-parent-height">
+    
+    {/* Les lignes sont en z-[1] */}
+    <BackgroundLines />
+
+    {/* La grille est forcée en z-10 pour passer au-dessus des lignes */}
+    <div className="px-10 md:px-32 grid grid-cols-1 md:grid-cols-12 gap-y-20 md:gap-y-64 max-w-[1500px] mx-auto relative z-10 bg-transparent">
+      {PROJECTS_BASE.map((p, i) => (
+        <ParallaxProject key={p.id} project={p} index={i} />
+      ))}
+    </div>
+
+  </div>
+</section>
+
+      {/* FOOTER & CONTACT */}
+      <section id="contact-section" className="relative h-screen w-full flex flex-col items-center justify-center border-t border-white/5 bg-black">
+          <div className="flex flex-col items-center px-10 text-center">
+              <h2 className="text-[12px] md:text-[14px] font-bold uppercase tracking-[0.5em]">Contact</h2>
+              <div className="h-[1px] w-8 bg-white/20 my-6" />
+              <a href="mailto:hello@jpsastre.com" className="text-[10px] md:text-[12px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors mb-20">
+                hello@jpsastre.com
+              </a>
+          </div>
+
+          <button onClick={() => handleScrollTo(0)} className="group flex flex-col items-center gap-4 transition-opacity hover:opacity-60">
+            <div className="h-10 w-[1px] bg-white/20 group-hover:bg-white group-hover:h-14 transition-all duration-500" />
+            <span className="text-[9px] tracking-[0.4em] uppercase font-bold">Back to Top</span>
+          </button>
+      </section>
+
+      {/* CURSEUR */}
+      <div id="custom-cursor" className={`fixed top-0 left-0 pointer-events-none z-[9999] rounded-full mix-blend-difference bg-white transition-[width,height] duration-300 ease-out ${isHovered ? 'w-6 h-6' : 'w-2 h-2'}`} style={{ transform: 'translate(-50%, -50%)', display: 'none' }} />
+
+      <style jsx global>{`
+        body { background: black; margin: 0; overflow-x: hidden; }
+        ::-webkit-scrollbar { display: none; }
+        @keyframes scroll-line { 0%, 100% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } }
+        .animate-scroll-line { animation: scroll-line 2.5s infinite ease-in-out; }
+      `}</style>
+    </main>
+  );
+}
