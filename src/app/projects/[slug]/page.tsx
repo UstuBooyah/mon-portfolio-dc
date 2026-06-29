@@ -76,7 +76,7 @@ onClick={() => router.push("/")} // 🟢 Modifié ici : redirige directement à 
         {/* 🎥 CONTENEUR DE LA VIDÉO DYNAMIQUE */}
         <div className="w-full relative group/video">
           
-          <div className="w-full bg-neutral-900 border border-white/[0.05] relative overflow-hidden aspect-video">
+          <div className="w-full bg-neutral-900 border border-white/[0.00] relative overflow-hidden aspect-video">
             <video 
               src={project.videoUrl} 
               autoPlay loop muted playsInline
