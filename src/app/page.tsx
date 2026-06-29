@@ -1,6 +1,6 @@
  "use client";
 
-
+import Link from "next/link";
 import React, { useState, useEffect, useRef } from 'react';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -378,7 +378,7 @@ const MainHydratedContent = () => {
 
         id="custom-cursor"
 
-        className={`fixed hidden items-center justify-center pointer-events-none rounded-full z-[9999] mix-blend-difference bg-white transition-all duration-300 ease-out -translate-x-1/2 -translate-y-1/2 ${
+        className={`hidden md:block fixed hidden items-center justify-center pointer-events-none rounded-full z-[9999] mix-blend-difference bg-white transition-all duration-300 ease-out -translate-x-1/2 -translate-y-1/2 ${
 
           isHovered ? "w-6 h-6" : "w-2 h-2"
 
@@ -412,8 +412,7 @@ const MainHydratedContent = () => {
 
   <div className="absolute inset-0 z-0">
 
-    <ParticleTrail />
-
+    
     <motion.div
 
       style={{ y: videoY }}
@@ -483,20 +482,31 @@ const MainHydratedContent = () => {
 
 
       <nav className="flex flex-col items-end gap-1 md:gap-2 text-[8px] sm:text-[10px] md:text-[12px] tracking-[0.2em] md:tracking-[0.3em] uppercase font-medium absolute top-0 right-0 p-8 md:p-14 pointer-events-auto">
+  
+  <button 
+    onClick={() => handleScrollTo('#projects-section')} 
+    className="group relative pb-1 hover:opacity-100 transition-opacity whitespace-nowrap"
+  >
+    Selected Works
+    <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
+  </button>
 
-        <button onClick={() => handleScrollTo('#projects-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
+  <button 
+    onClick={() => handleScrollTo('#contact-section')} 
+    className="group relative pb-1 hover:opacity-100 transition-opacity whitespace-nowrap"
+  >
+    Contact
+    <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
+  </button>
 
-          Selected Works
-
-        </button>
-
-        <button onClick={() => handleScrollTo('#contact-section')} className="hover:opacity-50 transition-opacity whitespace-nowrap">
-
-          Contact
-
-        </button>
-
-      </nav>
+  <Link 
+    href="/about" 
+    className="group relative pb-1 hover:opacity-100 transition-opacity whitespace-nowrap normal-case font-medium clickable"
+  >
+    About
+    <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
+  </Link>
+</nav>
 
     </div>
 
@@ -504,100 +514,80 @@ const MainHydratedContent = () => {
 
 
   <motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.98 }}
+  onClick={(e) => {
+    e.stopPropagation();
+    setIsDemoreelOpen(true);
+  }}
+  className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 lg:absolute lg:bottom-40 lg:left-14 pointer-events-auto mx-auto lg:mx-0 group pb-1 w-max block"
+>
+  WATCH DEMOREEL
+  <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
+</motion.button>
 
-    whileHover={{ scale: 1.05 }}
-
-    whileTap={{ scale: 0.98 }}
-
-    onClick={(e) => {
-
-      e.stopPropagation();
-
-      setIsDemoreelOpen(true);
-
-    }}
-
-    className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 lg:absolute lg:bottom-40 lg:left-14 pointer-events-auto mx-auto lg:mx-0"
-
-  >
-
-    WATCH DEMOREEL
-
-  </motion.button>
-
-
-  <motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
-
-       <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 block max-w-[65vw] md:max-w-none leading-relaxed md:whitespace-nowrap">
-
-          Digital / Motion Design / Immersive Installations / Video Projection
-
-       </span>
-
-       <button onClick={() => handleScrollTo(introRef.current)} className="group flex flex-col items-center shrink-0 pointer-events-auto">
-
-          <p className="mb-2 text-[8px] md:text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
-
-          <div className="h-[30px] md:h-[50px] w-[1px] bg-white animate-scroll-line" />
-
-       </button>
-
-  </motion.div>
-
+<motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
+  <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 block max-w-[65vw] md:max-w-none leading-relaxed md:whitespace-nowrap">
+    Digital / Motion Design / Immersive Installations / Video Projection
+  </span>
+  
+  <button onClick={() => handleScrollTo(introRef.current)} className="group flex flex-col items-center shrink-0 pointer-events-auto">
+    <p className="mb-2 text-[8px] md:text-[10px] uppercase tracking-widest group-hover:text-white/60">Scroll</p>
+    <div className="h-[30px] md:h-[50px] w-[1px] bg-white animate-scroll-line" />
+  </button>
+</motion.div>
 </section>
 
-      {/* 2. ABOUT SECTION AVEC CLIP-PATH */}
-
+{/* 2. ABOUT SECTION AVEC CLIP-PATH */}
       <section
-
         ref={introRef}
-
         className="relative min-h-[150vh] w-full flex items-center justify-center bg-black"
-
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-
       >
-
         <motion.div style={{ y: introBgY }} className="absolute inset-0 z-0 h-full w-full">
-
-            <img src="/SelectedWorks/2024-louboutin_01.webp" className="h-full w-full object-cover grayscale opacity-40" />
-
+            <img src="/Portrait2.webp" className="h-full w-full object-cover grayscale opacity-40" alt="Portrait background" />
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
-
         </motion.div>
 
         <div className="sticky top-0 h-screen w-full flex items-center justify-center z-20 pointer-events-none">
-
-            <div className="w-[85vw] md:w-[55vw] aspect-square bg-black border border-white/5 flex items-center justify-center p-8 md:p-12 pointer-events-auto shadow-2xl">
-
+            {/* Ajout de flex-col ici pour empiler le texte ET le bouton proprement */}
+            <div className="w-[85vw] md:w-[55vw] aspect-square bg-black border border-white/5 flex flex-col items-center justify-center p-8 md:p-12 pointer-events-auto shadow-2xl">
+                
                 <p className="text-[4.5vw] md:text-[2vw] font-bold uppercase leading-light text-white text-center">
-    {INTRO_TEXT.split(" ").map((word, i) => {
-        // Enlève la ponctuation pour la comparaison
-        const cleanWord = word.replace(/[,.&]/g, "").toLowerCase();
-        
-        // Liste des mots clés que tu veux mettre en avant (en blanc)
-        const keywords = ["creative", "artistic", "director", "paris", "motion", "design", "expériences", "immersives", "marques", "narration"];
-        const isImportant = keywords.includes(cleanWord);
+                  {INTRO_TEXT.split(" ").map((word, i) => {
+                      const cleanWord = word.replace(/[,.&]/g, "").toLowerCase();
+                      const keywords = ["creative", "artistic", "director", "paris", "motion", "design", "expériences", "immersives", "marques", "narration"];
+                      const isImportant = keywords.includes(cleanWord);
 
-        return (
-            <motion.span 
-                key={i} 
-                className="inline-block mr-2" 
-                initial={{ opacity: 0 }} 
-                whileInView={{ opacity: isImportant ? 1 : 0.3 }} // Blanc si important, gris sinon
-                viewport={{ once: false }} 
-                transition={{ delay: i * 0.02 }}
-            >
-              {word}
-            </motion.span>
-        );
-    })}
-</p>
+                      return (
+                          <motion.span 
+                              key={i} 
+                              className="inline-block mr-2" 
+                              initial={{ opacity: 0 }} 
+                              whileInView={{ opacity: isImportant ? 1 : 0.3 }}
+                              viewport={{ once: false }} 
+                              transition={{ delay: i * 0.02 }}
+                          >
+                            {word}
+                          </motion.span>
+                      );
+                  })}
+                </p>
+
+                {/* Le bouton est maintenant à sa place légitime, après le paragraphe */}
+                <div className="mt-8 md:mt-12 flex justify-center w-full">
+                  <Link 
+    href="/about"
+    className="group relative py-2 text-[10px] tracking-[0.3em] text-white/50 hover:text-white uppercase transition-colors duration-300 clickable outline-none"
+  >
+    Learn More
+    {/* Une ligne fine sous le texte qui s'étend depuis le centre au survol */}
+    <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
+  </Link>
+                </div>
 
             </div>
-
         </div>
-
       </section>
 
      
