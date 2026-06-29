@@ -520,9 +520,9 @@ const MainHydratedContent = () => {
     e.stopPropagation();
     setIsDemoreelOpen(true);
   }}
-  className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 lg:absolute lg:bottom-40 lg:left-14 pointer-events-auto mx-auto lg:mx-0 group pb-1 w-max block"
+  className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 lg:absolute lg:bottom-40 lg:left-21.5 pointer-events-auto mx-auto lg:mx-0 group pb-1 w-max block"
 >
-  WATCH DEMOREEL
+  Watch Demoreel
   <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
 </motion.button>
 
