@@ -68,14 +68,28 @@ export default function ProjectDetail() {
             {project.title}
           </h1>
         </div>
-        <div className="w-full aspect-[21/9] overflow-hidden relative border border-white/[0.05] mt-8">
-          <video 
-            src="/Demoreel_2026_V1_15s.mp4" 
-            autoPlay loop muted playsInline
-            className="w-full h-full object-cover"
-          />
+        
+        {/* 🎥 CONTENEUR DE LA VIDÉO PRINCIPALE LOUBOUTIN */}
+        <div className="w-full relative group/video">
+                    
+          {/* Ta vidéo principale */}
+          <div className="w-full bg-neutral-900 border border-white/[0.05] relative overflow-hidden aspect-video">
+            <video 
+              src="/SelectedWorks/LOUBOUTIN_15S_low.mp4" 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover/video:scale-[1.02]"
+            />
+          </div>
+
+          {/* 🟢 BLOC CRÉDITS VIDÉO */}
+          <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
+            Video Credits: [©Superbien Studio / ©Christian Louboutin / ©David Lachapelle]
+          </p>
         </div>
-      </section>
+      </section> {/* 🟢 FIXE: Fermeture propre de la section Hero ici */}
 
       {/* Info Section */}
       <section className="relative w-full px-8 md:px-14 py-20 grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-white/[0.05]">
@@ -95,82 +109,135 @@ export default function ProjectDetail() {
         </div>
         <div className="md:col-span-8 max-w-2xl">
           <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light">
-            {/* Project description here */}
             To mark Fashion Week, Louboutin is presenting its new Spring/Summer 2025 collection. Working closely with David Lachapelle, who was given "carte blanche" over the overall artistic direction, I worked on producing a 13-minute show, screened at the Molitor swimming pool in Paris.
-An impressive show, enhanced by a performance from Olympic swimmers.
+            An impressive show, enhanced by a performance from Olympic swimmers.
           </p>
         </div>
       </section>
 
-<section className="w-full px-8 md:px-14 pb-32">
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-24 md:gap-y-40 items-start">
-    
-    {/* 1. Image Gauche - Lente */}
-    <div className="w-full">
-      <ScrollParallax speed={-30}>
-        <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
-          <img 
-            src="/SelectedWorks/2024-louboutin_01.webp" // 💡 Image 1
-            alt={`${project.title} - Vue 1`}
-            className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
-          />
-        </div>
-        <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
-      ©[Superbien Studio]
-    </p>
-      </ScrollParallax>
-    </div>
+      {/* 🟢 GALLERY SECTION WITH INTEGRATED HOME BACKGROUND LINES & DOTS */}
+      <section className="w-full px-8 md:px-14 pb-32 relative bg-black overflow-hidden">
+        
+        {/* REPRODUCTION IDÉALE DU COMPOSANT BACKGROUND LINES */}
+        <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+          <div className="relative w-full h-full">
+            
+            {/* 1. Lignes verticales courtes aléatoires */}
+            {Array.from({ length: 45 }).map((_, i) => {
+              const top = 5 + ((i * 17) % 85);
+              const left = (i * 13.7) % 100;
+              const height = 5 + ((i * 23) % 50); 
+              const opacity = 0.08 + ((i * 7) % 22) / 100;
+              
+              return (
+                <div
+                  key={`grid-line-${i}`}
+                  style={{ 
+                    top: `${top}%`, 
+                    left: `${left}%`, 
+                    height: `${height}vh`, 
+                    opacity: opacity 
+                  }}
+                  className={`absolute w-[2px] bg-gradient-to-b from-transparent via-white/80 to-transparent ${i % 3 === 0 ? "hidden md:block" : ""}`}
+                />
+              );
+            })}
 
-    {/* 2. Image Droite - Rapide + Décalée vers le bas */}
-    <div className="w-full md:pt-32">
-      <ScrollParallax speed={-70}>
-        <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
-          <img 
-            src="/SelectedWorks/2024-louboutin_02_Thb.webp" // 💡 Image 2
-            alt={`${project.title} - Vue 2`}
-            className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
-          />
+            {/* 2. Petits disques blancs */}
+            {Array.from({ length: 25 }).map((_, i) => {
+              const top = 5 + (i * 3.5);
+              const left = (i * 17.1) % 100;
+              const opacity = 0.15 + ((i * 5) % 20) / 100;
+              const sizeClass = i % 4 === 0 ? "w-[1px] h-[1px]" : i % 4 === 1 ? "w-[2px] h-[2px]" : i % 4 === 2 ? "w-[3px] h-[3px]" : "w-[4px] h-[4px]";
+              
+              return (
+                <div
+                  key={`grid-dot-${i}`}
+                  style={{ 
+                    top: `${top}%`, 
+                    left: `${left}%`, 
+                    opacity: opacity 
+                  }}
+                  className={`absolute bg-white rounded-full ${sizeClass} ${i % 3 === 0 ? "hidden md:block" : ""}`}
+                />
+              );
+            })}
+          </div>
         </div>
-        <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
-      ©[ChristianLouboutin]
-    </p>
-      </ScrollParallax>
-    </div>
 
-    {/* 3. Image Gauche 2 - Rapide */}
-    <div className="w-full md:-mt-[300px]">
-      <ScrollParallax speed={-60}>
-        <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
-          <img 
-            src="/SelectedWorks/2024-louboutin-03_Thb.webp" // 💡 Image 3
-            alt={`${project.title} - Vue 3`}
-            className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
-          />
+        {/* CONTENEUR DES IMAGES */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-24 md:gap-y-40 items-start pt-20 relative z-20">
+          
+          {/* 🖼️ IMAGE 1 */}
+          <div className="w-full relative group/item">
+            <div className="absolute top-0 left-0 w-[4px] h-[4px] bg-white rounded-full -translate-x-1/2 -translate-y-6 z-30 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-500" />
+            <ScrollParallax speed={-30}>
+              <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
+                <img 
+                  src="/SelectedWorks/2024-louboutin_01.webp" 
+                  alt="View 1"
+                  className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
+                />
+              </div>
+              <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
+                © [Superbien Studio]
+              </p>
+            </ScrollParallax>
+          </div>
+
+          {/* 🖼️ IMAGE 2 */}
+          <div className="w-full md:pt-32 relative group/item">
+            <div className="absolute top-0 right-0 w-[4px] h-[4px] bg-white rounded-full translate-x-1/2 -translate-y-6 z-30 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-500" />
+            <ScrollParallax speed={-70}>
+              <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
+                <img 
+                  src="/SelectedWorks/2024-louboutin_02_Thb.webp" 
+                  alt="Vue 2"
+                  className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
+                />
+              </div>
+              <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
+                © [ChristianLouboutin]
+              </p>
+            </ScrollParallax>
+          </div>
+
+          {/* 🖼️ IMAGE 3 */}
+          <div className="w-full md:-mt-[160px] relative group/item">
+            <div className="absolute top-0 left-0 w-[4px] h-[4px] bg-white rounded-full -translate-x-1/2 -translate-y-6 z-30 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-500" />
+            <ScrollParallax speed={-60}>
+              <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
+                <img 
+                  src="/SelectedWorks/2024-louboutin-03_Thb.webp" 
+                  alt="Vue 3"
+                  className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
+                />
+              </div>
+              <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
+                © [Superbien Studio]
+              </p>
+            </ScrollParallax>
+          </div>
+
+          {/* 🖼️ IMAGE 4 */}
+          <div className="w-full relative group/item">
+            <div className="absolute top-0 right-0 w-[4px] h-[4px] bg-white rounded-full translate-x-1/2 -translate-y-6 z-30 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-500" />
+            <ScrollParallax speed={-20}>
+              <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
+                <img 
+                  src="/SelectedWorks/2024-louboutin_06.webp" 
+                  alt="Vue 4"
+                  className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
+                />
+              </div>
+              <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
+                © [ChristianLouboutin]
+              </p>
+            </ScrollParallax>
+          </div>
+
         </div>
-        <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
-      ©[Superbien Studio]
-    </p>
-      </ScrollParallax>
-    </div>
-
-    {/* 4. Image Droite 2 - Lente (Pas de pt-32 ici pour casser le motif précédent) */}
-    <div className="w-full">
-      <ScrollParallax speed={-20}>
-        <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
-          <img 
-            src="/SelectedWorks/2024-louboutin_06.webp" // 💡 Image 4
-            alt={`${project.title} - Vue 4`}
-            className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
-          />
-        </div>
-         <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
-      ©[ChristianLouboutin]
-    </p>
-      </ScrollParallax>
-    </div>
-
-  </div>
-</section>
+      </section>
 
       {/* Next Project */}
       <section className="w-full border-t border-white/[0.05] py-32 flex flex-col items-center justify-center">

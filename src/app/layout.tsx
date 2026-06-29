@@ -1,9 +1,9 @@
+import ScrollToTop from "@/components/ScrollToTop";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import SmoothScroll from "@/components/SmoothScroll";
-// 🟢 Import direct sans accolades car c'est un export par défaut
 import CustomCursor from "@/components/CustomCursor";
 
 const geistSans = Geist({
@@ -26,6 +26,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} bg-black text-white antialiased font-sans selection:bg-white selection:text-black`} suppressHydrationWarning>
         <CustomCursor />
         <SmoothScroll>
+          <ScrollToTop />
           {children}
         </SmoothScroll>
       </body>
