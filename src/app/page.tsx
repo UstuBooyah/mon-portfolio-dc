@@ -1,52 +1,14 @@
  "use client";
 
+import { PROJECTS_DATA } from "../data/projects";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from 'react';
-
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 import { useLenis } from 'lenis/react';
 
 import { ParticleTrail } from './ParticleTrail';
 
-
-// --- CONFIGURATION DES PROJETS ---
-
-const PROJECTS_BASE = [
-
-  {
-
-    id: 1,
-
-    title: "Paris is Louboutining",
-
-    category: "Projection Mapping",
-
-    image: "/SelectedWorks/2024-louboutin-04_Thb.webp",
-
-    layout: "md:col-span-6 md:mt-0",
-
-    speed: -100
-
-  },
-
-  { id: 2, title: "Reopening Nôtre-Dame", category: "Projection Mapping", image: "/SelectedWorks/NOTRE-DAME-Thb.webp", layout: "md:col-span-5 md:mt-64 md:ml-12", speed: 120 },
-
-  { id: 3, title: "Interactive Flow", category: "Installation", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-5 md:mt-20", speed: -150 },
-
-  { id: 4, title: "Visual Narrative", category: "Digital Design", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-6 md:ml-24 md:mt-40", speed: 80 },
-
-  { id: 5, title: "Abstract Core", category: "Generative Art", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-7 md:mt-20", speed: -120 },
-
-  { id: 6, title: "Neon Pulse", category: "Light Installation", image: "https://images.unsplash.com/photo-1543965170-4c012556e2eb?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-4 md:mt-0 md:ml-auto", speed: 150 },
-
-  { id: 7, title: "Cyber Landscape", category: "3D Environment", image: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-5 md:mt-40", speed: -90 },
-
-  { id: 8, title: "Liquid Metal", category: "CGI Animation", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-6 md:ml-20 md:mt-10", speed: 110 },
-
-  { id: 9, title: "Echo Chamber", category: "Audio-Visual", image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80", layout: "md:col-span-10 md:mt-32 mx-auto", speed: -60 },
-
-];
 
 
 const INTRO_TEXT = "Creative and Artistic Director based in Paris, spécialisé en motion design & expériences immersives pour les marques. Mon travail fusionne art, technologie et narration pour créer des moments inoubliables.";
@@ -62,16 +24,16 @@ const BackgroundLines = () => {
 
  
 
-  const yFast = useTransform(scrollYProgress, [0, 1], [-200, 200]);
+  const yFast = useTransform(scrollYProgress, [0, 2], [-300, 300]);
 
-  const ySlow = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const ySlow = useTransform(scrollYProgress, [0, 3], [50, -50]);
 
-  const ySuperFast = useTransform(scrollYProgress, [0, 1], [-700, 700]);
+  const ySuperFast = useTransform(scrollYProgress, [0, 4], [-700, 700]);
 
 
   const lines = useRef(
 
-    Array.from({ length: 60 }).map((_, i) => {
+    Array.from({ length: 100 }).map((_, i) => {
 
       const top = 5 + (i * 1.5);
 
@@ -372,19 +334,7 @@ const MainHydratedContent = () => {
       `}</style>
 
 
-      {/* 🔴 LE ROND REVIENT : TAILLE CALIBRÉE DE 2 À 6 AU SURVOL SANS LE DOIGT */}
-
-      <div
-
-        id="custom-cursor"
-
-        className={`hidden md:block fixed hidden items-center justify-center pointer-events-none rounded-full z-[9999] mix-blend-difference bg-white transition-all duration-300 ease-out -translate-x-1/2 -translate-y-1/2 ${
-
-          isHovered ? "w-6 h-6" : "w-2 h-2"
-
-        }`}
-
-      />
+      
 
 
       {/* NOM FIXE AVEC PARALLAX */}
@@ -520,13 +470,13 @@ const MainHydratedContent = () => {
     e.stopPropagation();
     setIsDemoreelOpen(true);
   }}
-  className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/40 hover:text-white transition-colors duration-300 relative z-40 lg:absolute lg:bottom-40 lg:left-21.5 pointer-events-auto mx-auto lg:mx-0 group pb-1 w-max block"
+  className="text-[9px] tracking-[0.4em] uppercase font-medium text-white/100 hover:text-white transition-colors duration-300 relative z-40 lg:absolute lg:bottom-40 lg:left-21.5 pointer-events-auto mx-auto lg:mx-0 group pb-1 w-max block"
 >
-  Watch Demoreel
+  Watch Showreel
   <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
 </motion.button>
 
-<motion.div style={{ opacity: opacityFade }} className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
+<motion.div className="relative z-10 w-full px-8 md:px-14 pb-20 md:pb-14 flex justify-between items-end">
   <span className="text-[7px] sm:text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-white/40 block max-w-[65vw] md:max-w-none leading-relaxed md:whitespace-nowrap">
     Digital / Motion Design / Immersive Installations / Video Projection
   </span>
@@ -593,46 +543,53 @@ const MainHydratedContent = () => {
      
 
       {/* 3. SECTION SELECTED WORKS */}
-
       <section id="projects-section" className="relative w-full px-8 md:px-14 py-20 z-10 bg-black">
-
         <BackgroundLines />
 
-       
-
         <div className="relative w-full mb-40 overflow-hidden px-4 z-10">
-
           <motion.h2
-
             initial={{ opacity: 0, x: -50 }}
-
             whileInView={{ opacity: 0.15, x: 0 }}
-
             transition={{ duration: 1.5 }}
-
             className="text-[14vw] md:text-[20vw] font-bold uppercase tracking-lighter leading-none text-white text-center"
-
           >
-
             Selected Works
-
           </motion.h2>
-
         </div>
 
+        {/* Grille asymétrique contenant uniquement tes 10 projets */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-16 gap-y-24 md:gap-y-48 items-center w-full">
+          {PROJECTS_DATA.map((project, idx) => {
+            const isEven = idx % 2 === 0;
+            const colSpan = isEven ? "md:col-span-7" : "md:col-span-5";
+            const projectSlug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-y-32 items-start w-full">
-
-          {PROJECTS_BASE.map((project, idx) => (
-
-            <ParallaxProject key={project.id} project={project} index={idx} />
-
-          ))}
-
+            return (
+              <Link 
+      href={`/projects/${projectSlug}`}
+      key={project.id} 
+      className={`relative group cursor-pointer w-full flex flex-col ${colSpan}
+        ${isEven ? 'md:items-start md:pr-4' : 'md:items-end md:pl-4 md:mt-32'}`}
+    >
+      <ParallaxElement speed={isEven ? 0.25 : -0.25}>
+        <div className="aspect-[21/9] bg-neutral-950 overflow-hidden relative w-full border border-white/[0.03]">
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            className="w-full h-full object-cover md:grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out group-hover:scale-103" 
+          />
         </div>
-
+        
+        <div className={`mt-4 flex flex-col w-full text-[11px] tracking-widest uppercase ${isEven ? 'items-start' : 'items-end'}`}>
+          <span className="font-semibold text-white tracking-[0.2em]">{idx + 1}. {project.title}</span>
+          <span className="text-white/40 mt-1 text-[10px]">{project.year} — {project.category}</span>
+        </div>
+      </ParallaxElement>
+    </Link> // 🟢 On ferme le </Link> ici
+  );
+})}
+        </div>
       </section>
-
 
       {/* 4. SECTION CONTACT */}
 
@@ -703,7 +660,22 @@ const MainHydratedContent = () => {
 
 
 // --- COMPOSANT RACINE ---
+const ParallaxElement = ({ children, speed = 0.1 }: { children: React.ReactNode; speed?: number }) => {
+  const ref = useRef(null);
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, speed * 500]);
+
+  return (
+    <motion.div ref={ref} style={{ y }} className="w-full">
+      {children}
+    </motion.div>
+  );
+};
 export default function Home() {
 
   const [isMounted, setIsMounted] = useState(false);

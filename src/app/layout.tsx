@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google"; // Polices modernes de Vercel
+import { Geist } from "next/font/google";
 import "./globals.css";
+import React from "react";
 import SmoothScroll from "@/components/SmoothScroll";
+// 🟢 Import direct sans accolades car c'est un export par défaut
+import CustomCursor from "@/components/CustomCursor";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -18,12 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body className={`${geistSans.variable} antialiased font-sans`}
-      suppressHydrationWarning>
+    <html lang="fr" className="cursor-none">
+      <body className={`${geistSans.variable} bg-black text-white antialiased font-sans selection:bg-white selection:text-black`} suppressHydrationWarning>
+        <CustomCursor />
         <SmoothScroll>
-    {children}
-  </SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
