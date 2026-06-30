@@ -22,7 +22,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 1,
     title: "Paris is Louboutining",
-    category: "Fashion Show / Immersive",
+    category: "Fashion Show / Projection Mapping",
     client: "Christian Louboutin",
     year: "2024",
     speed: 0.25,
@@ -54,6 +54,51 @@ export const PROJECTS_DATA: Project[] = [
   { type: "image", src: "/SelectedWorks/NotreDame_Colors.png", credits: "© [Superbien Studio]" },
   { type: "image", src: "/SelectedWorks/NotreDame_Merci.webp", credits: "© [Superbien Studio]" },
   { type: "video", src: "/SelectedWorks/NotreDame_Merci.mp4", credits: "© [Superbien Studio]" }     // 🟢 Tout en minuscule + "type: video"
+]
+  },
+   {
+    id: 3,
+    title: "OLYMPICS - PARIS 2024",
+    category: "VideoProjection / Mapping",
+    year: "2024",
+    speed: 0.25,
+    client: "Paris 2024",
+    image: "/SelectedWorks/JO_2024_01.webp",
+    videoUrl: "/SelectedWorks/JO_25S2.mp4",
+    videoCredits: "[©Superbien Studio]",
+    description: "During the Paris 2024 Olympic Games, I was in charge of the creative direction for five video-mappings projected onto the competition venues before the events. Working closely with the Paris 2024 teams, as well as teams of talented art directors and motion designers, we overcame the technical challenges posed by the bright colours of the fields of play and offered the audience a vibrant tribute to the art, sport and history of this extraordinary sporting event.",
+    gallery: [  
+      
+      { type: "video", src: "/SelectedWorks/JO_2024_AbstractLines_01(1).mp4" }, 
+      { type: "image", src: "/SelectedWorks/JO_2024_02.jpg.webp", credits: "© [Superbien Studio]" },
+      { type: "image", src: "/SelectedWorks/JO_2024_03.jpg.webp", credits: "© [Superbien Studio]" },
+      { type: "video", src: "/SelectedWorks/JO_2024_AbstractMovements_01(1).mp4" },
+      { type: "image", src: "/SelectedWorks/JO_2024_06.webp" },
+      { type: "image", src: "/SelectedWorks/JO_2024_12.webp" },
+]
+  },
+  {
+    id: 4,
+    title: "LE FIGARO 200th ANNIVERSARY",
+    category: "VideoProjection / Mapping",
+    year: "2026",
+    speed: 0.25,
+    client: "Le Figaro",
+    image: "/SelectedWorks/Grand_Palais.webp",
+    videoUrl: "/SelectedWorks/FIGARO_20s.mp4",
+    videoCredits: "[©Superbien Studio]",
+    description: "1826–2026: 200 years of shared history between *Le Figaro* and France, celebrated at the Grand Palais in Paris, featuring two large-scale video-mapping displays on either side of the central nave. Two bespoke films, making the most of the venue’s incredible architecture, recounting on one side the production of the newspaper, and on the other the leading figures who have built Le Figaro’s reputation. I was in charge of artistic direction and creative direction, storyboarding, and overseeing the teams of motion designers.",
+    gallery: [  
+
+      { type: "video", src: "/SelectedWorks/FIGARO_COLETTE.mp4" }, 
+      { type: "video", src: "/SelectedWorks/Figaro_Insitu_1.mp4", credits: "© [Jean-Pierre Sastre]" },
+      { type: "image", src: "/SelectedWorks/FIGARO_01.webp", credits: "© [Jean-Pierre Sastre]" },
+      { type: "image", src: "/SelectedWorks/FIGARO_03.webp", credits: "© [Superbien Studio]" },
+      { type: "image", src: "/SelectedWorks/FIGARO_04.webp", credits: "© [Superbien Studio]" },
+      { type: "image", src: "/SelectedWorks/FIGARO_05.webp", credits: "© [Superbien Studio]" },
+      { type: "image", src: "/SelectedWorks/FIGARO_Storyboard.webp" },
+      { type: "video", src: "/SelectedWorks/FIGARO_BALZAC.mp4" }
+
 ]
   }
 ];

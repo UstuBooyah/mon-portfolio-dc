@@ -330,8 +330,12 @@ const MainHydratedContent = ({ isMounted }: { isMounted: boolean }) => {
       </section>
 
       {/* 4. SECTION CONTACT */}
-      <section id="contact-section" className="relative h-screen w-full flex flex-col items-center justify-center border-t border-white/5 bg-black">
-        <div className="flex flex-col items-center px-10 text-center">
+      <section 
+      id="contact-section" 
+  className="relative min-h-screen w-full flex flex-col items-center justify-center bg-black z-30 pt-12 pb-12 mt-[30vh]"
+>
+  {/* FONDU DE TRANSITION TRES COURT */}
+  <div className="absolute top-0 left-0 w-full h-[35vh] -translate-y-full bg-gradient-to-t from-black to-transparent pointer-events-none" /><div className="flex flex-col items-center px-10 text-center">
           <h2 className="text-[12px] md:text-[14px] font-bold uppercase tracking-[0.5em]">Contact</h2>
           <div className="h-[1px] w-8 bg-white/20 my-6" />
           <a href="mailto:sastrejp@gmail.com" className="text-[10px] md:text-[12px] tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors mb-20">
