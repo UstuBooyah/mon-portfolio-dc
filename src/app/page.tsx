@@ -559,19 +559,26 @@ const MainHydratedContent = () => {
 
         {/* Grille asymétrique contenant uniquement tes 10 projets */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-16 gap-y-24 md:gap-y-48 items-center w-full">
-          {PROJECTS_DATA.map((project, idx) => {
-            const isEven = idx % 2 === 0;
-            const colSpan = isEven ? "md:col-span-7" : "md:col-span-5";
-            const projectSlug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+         {PROJECTS_DATA.map((project, idx) => {
+  const isEven = idx % 2 === 0;
+  const colSpan = isEven ? "md:col-span-7" : "md:col-span-5";
+  const projectSlug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-            return (
-              <Link 
+
+  // On peut la réduire sur mobile (ex: divisée par 3) pour éviter les collisions tactiles
+  const speed = typeof window !== "undefined" && window.innerWidth < 768 
+    ? project.speed * 0.3  // Vitesse calme sur mobile
+    : project.speed;       // Vitesse normale sur ordinateur
+
+  return (
+    <Link 
       href={`/projects/${projectSlug}`}
       key={project.id} 
       className={`relative group cursor-pointer w-full flex flex-col ${colSpan}
         ${isEven ? 'md:items-start md:pr-4' : 'md:items-end md:pl-4 md:mt-32'}`}
     >
-      <ParallaxElement speed={isEven ? 0.25 : -0.25}>
+    
+      <ParallaxElement speed={speed}>
         <div className="aspect-[21/9] bg-neutral-950 overflow-hidden relative w-full border border-white/[0.03]">
           <img 
             src={project.image} 
