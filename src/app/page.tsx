@@ -259,8 +259,11 @@ const MainHydratedContent = ({ isMounted }: { isMounted: boolean }) => {
       </section>
 
       {/* 2. ABOUT SECTION */}
-      <section ref={introRef} className="relative min-h-[100vh] md:min-h-[150vh] w-full flex items-center justify-center bg-black px-8 md:px-14 pt-20 pb-12 md:pt-48 md:pb-32" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}>
-        <motion.div style={{ y: introBgY }} className="absolute inset-0 z-0 h-full w-full">
+<section 
+  ref={introRef} 
+  className="relative min-h-[80vh] md:min-h-[150vh] w-full flex items-center justify-center bg-black px-8 md:px-14 pt-12 pb-12 md:pt-48 md:pb-32" 
+  style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
+>        <motion.div style={{ y: introBgY }} className="absolute inset-0 z-0 h-full w-full">
           <img src="/Portrait2.webp" className="h-full w-full object-cover grayscale opacity-40" alt="Portrait background" />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
         </motion.div>
@@ -293,8 +296,8 @@ const MainHydratedContent = ({ isMounted }: { isMounted: boolean }) => {
       <section id="projects-section" className="relative w-full px-8 md:px-14 py-20 z-10 bg-black">
         <BackgroundLines isMounted={isMounted} />
 
-        <div className="relative w-full mb-40 overflow-hidden px-4 z-10">
-          <motion.h2 initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 0.15, x: 0 }} transition={{ duration: 1.5 }} className="text-[14vw] md:text-[20vw] font-bold uppercase tracking-lighter leading-none text-white text-center">
+<div className="relative w-full mb-16 md:mb-40 overflow-hidden px-4 z-10">
+            <motion.h2 initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 0.15, x: 0 }} transition={{ duration: 1.5 }} className="text-[14vw] md:text-[20vw] font-bold uppercase tracking-lighter leading-none text-white text-center">
             Selected Works
           </motion.h2>
         </div>
