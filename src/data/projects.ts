@@ -69,7 +69,7 @@ export const PROJECTS_DATA: Project[] = [
     description: "During the Paris 2024 Olympic Games, I was in charge of the creative direction for five video-mappings projected onto the competition venues before the events. Working closely with the Paris 2024 teams, as well as teams of talented art directors and motion designers, we overcame the technical challenges posed by the bright colours of the fields of play and offered the audience a vibrant tribute to the art, sport and history of this extraordinary sporting event.",
     gallery: [  
       
-      { type: "video", src: "/SelectedWorks/JO_2024_AbstractLines_01(1).mp4" }, 
+      { type: "video", src: "/SelectedWorks/JO_2024_AbstractLines_01(1).mp4,"credits: "." }, 
       { type: "image", src: "/SelectedWorks/JO_2024_02.jpg.webp", credits: "© [Superbien Studio]" },
       { type: "image", src: "/SelectedWorks/JO_2024_03.jpg.webp", credits: "© [Superbien Studio]" },
       { type: "video", src: "/SelectedWorks/JO_2024_AbstractMovements_01(1).mp4", credits: "." },
