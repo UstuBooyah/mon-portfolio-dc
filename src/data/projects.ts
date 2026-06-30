@@ -72,9 +72,9 @@ export const PROJECTS_DATA: Project[] = [
       { type: "video", src: "/SelectedWorks/JO_2024_AbstractLines_01(1).mp4" }, 
       { type: "image", src: "/SelectedWorks/JO_2024_02.jpg.webp", credits: "© [Superbien Studio]" },
       { type: "image", src: "/SelectedWorks/JO_2024_03.jpg.webp", credits: "© [Superbien Studio]" },
-      { type: "video", src: "/SelectedWorks/JO_2024_AbstractMovements_01(1).mp4" },
-      { type: "image", src: "/SelectedWorks/JO_2024_06.webp" },
-      { type: "image", src: "/SelectedWorks/JO_2024_12.webp" },
+      { type: "video", src: "/SelectedWorks/JO_2024_AbstractMovements_01(1).mp4", credits: "." },
+      { type: "image", src: "/SelectedWorks/JO_2024_06.webp", credits: "." },
+      { type: "image", src: "/SelectedWorks/JO_2024_12.webp", credits: "." },
 ]
   },
   {
@@ -96,8 +96,8 @@ export const PROJECTS_DATA: Project[] = [
       { type: "image", src: "/SelectedWorks/FIGARO_03.webp", credits: "© [Superbien Studio]" },
       { type: "image", src: "/SelectedWorks/FIGARO_04.webp", credits: "© [Superbien Studio]" },
       { type: "image", src: "/SelectedWorks/FIGARO_05.webp", credits: "© [Superbien Studio]" },
-      { type: "image", src: "/SelectedWorks/FIGARO_Storyboard.webp" },
-      { type: "video", src: "/SelectedWorks/FIGARO_BALZAC.mp4" }
+      { type: "image", src: "/SelectedWorks/FIGARO_Storyboard.webp",credits: "." },
+      { type: "video", src: "/SelectedWorks/FIGARO_BALZAC.mp4", credits: "." }
 
 ]
   }
