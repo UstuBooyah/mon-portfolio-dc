@@ -31,10 +31,10 @@ export const PROJECTS_DATA: Project[] = [
     videoCredits: "[©Superbien Studio / ©Christian Louboutin / ©David Lachapelle]",
     description: "To mark Fashion Week, Louboutin is presenting its new Spring/Summer 2025 collection. Working closely with David Lachapelle, who was given 'carte blanche' over the overall artistic direction, I worked on producing a 13-minute show, screened at the Molitor swimming pool in Paris. An impressive show, enhanced by a performance from Olympic swimmers.",
     gallery: [
-      { src: "/SelectedWorks/2024-louboutin_01.webp", credits: "© [Superbien Studio]" },
-      { src: "/SelectedWorks/2024-louboutin_02_Thb.webp", credits: "© [ChristianLouboutin]" },
-      { src: "/SelectedWorks/2024-louboutin-03_Thb.webp", credits: "© [Superbien Studio]" },
-      { src: "/SelectedWorks/2024-louboutin_06.webp", credits: "© [ChristianLouboutin]" }
+       { type: "image", src: "/SelectedWorks/2024-louboutin_01.webp", credits: "© [Superbien Studio]" },
+       { type: "image", src: "/SelectedWorks/2024-louboutin_02_Thb.webp", credits: "© [ChristianLouboutin]" },
+       { type: "image", src: "/SelectedWorks/2024-louboutin-03_Thb.webp", credits: "© [Superbien Studio]" },
+       { type: "image", src: "/SelectedWorks/2024-louboutin_06.webp", credits: "© [ChristianLouboutin]" }
     ]
   },
   {
