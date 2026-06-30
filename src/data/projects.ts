@@ -42,7 +42,7 @@ export const PROJECTS_DATA: Project[] = [
     title: "ReOpening of Notre-Dame",
     category: "VideoProjection / Mapping",
     year: "2024",
-    speed: 0.25,
+    speed: 0.5,
     image: "/SelectedWorks/NOTRE-DAME-Thb.webp",
     videoUrl: "/SelectedWorks/NOTREDAME_25S.mp4",
     videoCredits: "[©Superbien Studio]",
