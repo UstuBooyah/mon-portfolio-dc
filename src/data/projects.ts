@@ -3,6 +3,7 @@ export interface Project {
   id: number;
   title: string;
   category: string;
+  client?: string;
   year: string;
   speed: number;
   image: string;
@@ -10,6 +11,7 @@ export interface Project {
   videoCredits: string;
   description: string;
   gallery: {
+    type: "image" | "video";
     src: string;
     credits: string;
   }[];
