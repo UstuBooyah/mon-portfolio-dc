@@ -261,7 +261,7 @@ const MainHydratedContent = ({ isMounted }: { isMounted: boolean }) => {
       {/* 2. ABOUT SECTION */}
 <section 
   ref={introRef} 
-  className="relative min-h-[50vh] md:min-h-[150vh] w-full flex items-center justify-center bg-black px-8 md:px-14 pt-12 pb-12 md:pt-48 md:pb-32" 
+  className="relative min-h-[30vh] md:min-h-[150vh] w-full flex items-center justify-center bg-black px-8 md:px-14 pt-12 pb-12 md:pt-48 md:pb-32" 
   style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
 >        <motion.div style={{ y: introBgY }} className="absolute inset-0 z-0 h-full w-full">
           <img src="/Portrait2.webp" className="h-full w-full object-cover grayscale opacity-40" alt="Portrait background" />
