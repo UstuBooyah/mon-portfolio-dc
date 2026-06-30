@@ -261,15 +261,14 @@ const MainHydratedContent = ({ isMounted }: { isMounted: boolean }) => {
       {/* 2. ABOUT SECTION */}
 <section 
   ref={introRef} 
-  className="relative min-h-[80vh] md:min-h-[150vh] w-full flex items-center justify-center bg-black px-8 md:px-14 pt-12 pb-12 md:pt-48 md:pb-32" 
+  className="relative min-h-[50vh] md:min-h-[150vh] w-full flex items-center justify-center bg-black px-8 md:px-14 pt-12 pb-12 md:pt-48 md:pb-32" 
   style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
 >        <motion.div style={{ y: introBgY }} className="absolute inset-0 z-0 h-full w-full">
           <img src="/Portrait2.webp" className="h-full w-full object-cover grayscale opacity-40" alt="Portrait background" />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
         </motion.div>
 
-        <div className="sticky top-0 h-screen w-full flex items-center justify-center z-20 pointer-events-none">
-          <div className="w-[85vw] md:w-[55vw] aspect-square bg-black border border-white/5 flex flex-col items-center justify-center p-8 md:p-12 pointer-events-auto shadow-2xl">
+<div className="relative md:sticky md:top-0 h-auto md:h-screen w-full flex items-center justify-center z-20 pointer-events-none">          <div className="w-[85vw] md:w-[55vw] aspect-square bg-black border border-white/5 flex flex-col items-center justify-center p-8 md:p-12 pointer-events-auto shadow-2xl">
             <p className="text-[4.5vw] md:text-[2vw] font-bold uppercase leading-light text-white text-center">
               {INTRO_TEXT.split(" ").map((word, i) => {
                 const cleanWord = word.replace(/[,.&]/g, "").toLowerCase();
