@@ -188,7 +188,7 @@ onClick={() => router.push("/")} // 🟢 Modifié ici : redirige directement à 
                 </ScrollParallax>
               </div>
             );
-          })}
+          }}
         </div>
       </section>
 
