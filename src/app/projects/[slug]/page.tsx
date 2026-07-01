@@ -156,42 +156,44 @@ onClick={() => router.push("/")} // 🟢 Modifié ici : redirige directement à 
         </div>
 
         {/* Boucle d'images asymétrique propre */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-24 md:gap-y-40 items-start pt-20 relative z-20">
-          {project.gallery?.map((media, index) => {
-            const isEven = index % 2 === 0;
-            const styleClass = index === 1 ? "md:pt-32" : index === 2 ? "md:-mt-[160px]" : "";
+<div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-24 md:gap-y-40 items-start pt-20 relative z-20">
+  {project.gallery?.map((media, index) => {
+    const isEven = index % 2 === 0;
+    const styleClass = index === 1 ? "md:pt-32" : index === 2 ? "md:-mt-[160px]" : "";
 
-            return (
-              <div key={index} className={`w-full relative group/item ${styleClass}`}>
-                <div className={`absolute top-0 ${isEven ? 'left-0 -translate-x-1/2' : 'right-0 translate-x-1/2'} w-[4px] h-[4px] bg-white rounded-full -translate-y-6 z-30 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-500`} />
-                
-                <ScrollParallax speed={isEven ? -30 : -70}>
-                  <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
-                    {media.type === "video" ? (
-                      <video 
-                        src={media.src} 
-                        autoPlay loop muted playsInline
-                        className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
-                      />
-                    ) : (
-                      <img 
-                        src={media.src} 
-                        alt={`${project.title} view ${index + 1}`}
-                        className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
-                      />
-                    )}
-                  </div>
-                  {project.credits && (
-                  <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
-                    {media.credits}
-                  </p>
+    return (
+      <div key={index} className={`w-full relative group/item ${styleClass}`}>
+        <div className={`absolute top-0 ${isEven ? 'left-0 -translate-x-1/2' : 'right-0 translate-x-1/2'} w-[4px] h-[4px] bg-white rounded-full -translate-y-6 z-30 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-500`} />
+        
+        <ScrollParallax speed={isEven ? -30 : -70}>
+          {/* Conteneur Média */}
+          <div className="w-full bg-neutral-900 border border-white/[0.05] relative group/img overflow-hidden">
+            {media.type === "video" ? (
+              <video 
+                src={media.src} 
+                autoPlay loop muted playsInline
+                className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
+              />
+            ) : (
+              <img 
+                src={media.src} 
+                alt={`${project.title} view ${index + 1}`}
+                className="w-full h-auto block transition-transform duration-700 ease-out group-hover/img:scale-105"
+              />
+            )}
+          </div>
+
+          {/* Rendu des crédits sécurisé */}
+          {media.credits && (
+            <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/40">
+              {media.credits}
+            </p>
           )}
-                </ScrollParallax>
-              </div>
-            );
-          }}
-        </div>
-      </section>
+        </ScrollParallax>
+      </div>
+    );
+  })}
+</div>
 
       {/* Next Project */}
       <section className="w-full border-t border-white/[0.05] py-32 flex flex-col items-center justify-center">
