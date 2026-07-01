@@ -194,6 +194,7 @@ onClick={() => router.push("/")} // 🟢 Modifié ici : redirige directement à 
     );
   })}
 </div>
+</section>
 
       {/* Next Project */}
       <section className="w-full border-t border-white/[0.05] py-32 flex flex-col items-center justify-center">
