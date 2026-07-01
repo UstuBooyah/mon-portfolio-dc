@@ -91,7 +91,7 @@ export const PROJECTS_DATA: Project[] = [
     description: "1826–2026: 200 years of shared history between *Le Figaro* and France, celebrated at the Grand Palais in Paris, featuring two large-scale video-mapping displays on either side of the central nave. Two bespoke films, making the most of the venue’s incredible architecture, recounting on one side the production of the newspaper, and on the other the leading figures who have built Le Figaro’s reputation. I was in charge of artistic direction and creative direction, storyboarding, and overseeing the teams of motion designers.",
     gallery: [  
 
-      { type: "video", src: "/SelectedWorks/FIGARO_COLETTE.mp4" }, 
+      { type: "video", src: "/SelectedWorks/FIGARO_COLETTE.mp4", credits: "" }, 
       { type: "video", src: "/SelectedWorks/Figaro_Insitu_1.mp4", credits: "© [Jean-Pierre Sastre]" },
       { type: "image", src: "/SelectedWorks/FIGARO_01.webp", credits: "© [Jean-Pierre Sastre]" },
       { type: "image", src: "/SelectedWorks/FIGARO_03.webp", credits: "© [Superbien Studio]" },
