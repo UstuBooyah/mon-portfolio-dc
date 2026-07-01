@@ -185,6 +185,7 @@ onClick={() => router.push("/")} // 🟢 Modifié ici : redirige directement à 
                   <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-white/30">
                     {media.credits}
                   </p>
+          )}
                 </ScrollParallax>
               </div>
             );
